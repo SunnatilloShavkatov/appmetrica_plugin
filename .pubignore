@@ -8,6 +8,6 @@
 /example/pubspec.lock
 pubspec.lock
 /.dart_tool/
+/example/
 .DS_Store
 ios/.DS_Store
-

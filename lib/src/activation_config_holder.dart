@@ -13,10 +13,13 @@ class ActivationConfigHolder {
   ActivationConfigHolder._();
 
   static bool _isActivated = false;
+
   static bool get activated => _isActivated;
 
   static AppMetricaConfig? _lastActivationConfig;
+
   static AppMetricaConfig? get lastActivationConfig => _lastActivationConfig;
+
   static set lastActivationConfig(AppMetricaConfig? value) {
     if (!_isActivated) {
       _isActivated = true;
@@ -59,11 +62,11 @@ class ActivationCompleter {
     if (ActivationConfigHolder.activated || false == appOpenTrackingEnabled) {
       return Future.value();
     } else {
-      return InitialDeepLinkHolderPigeon()
-          .getInitialDeeplink()
-          .then((value) => {
-                if (value != null) {AppMetricaPigeon().reportAppOpen(value)}
-              });
+      return InitialDeepLinkHolderPigeon().getInitialDeeplink().then((value) {
+        if (value != null) {
+          AppMetricaPigeon().reportAppOpen(value);
+        }
+      });
     }
   }
 }

@@ -9,8 +9,9 @@
 import 'package:flutter/material.dart';
 import 'package:appmetrica_plugin/appmetrica_plugin.dart';
 
-AppMetricaConfig get _config =>
-    const AppMetricaConfig('c07d67ac-6f2c-40eb-8bbe-5604e54f019d', logs: true);
+import '.env.dart';
+
+AppMetricaConfig get _config => const AppMetricaConfig(key, logs: true);
 
 Future<void> main() async {
   AppMetrica.runZoneGuarded(
