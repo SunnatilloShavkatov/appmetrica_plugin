@@ -138,22 +138,27 @@ final eCommerceConverters = <Type, Function>{
       originalPrice: product.originalPrice?.toPigeon(),
       promocodes: product.promocodes),
   ECommerceReferrer: (ECommerceReferrer referrer) => ECommerceReferrerPigeon(
-      identifier: referrer.identifier,
-      type: referrer.type,
-      screen: referrer.screen?.toPigeon()),
+        identifier: referrer.identifier,
+        type: referrer.type,
+        screen: referrer.screen?.toPigeon(),
+      ),
   ECommerceCartItem: (ECommerceCartItem cartItem) => ECommerceCartItemPigeon(
-      product: cartItem.product.toPigeon(),
-      quantity: cartItem.quantity.toString(),
-      revenue: cartItem.revenue.toPigeon(),
-      referrer: cartItem.referrer?.toPigeon()),
+        product: cartItem.product.toPigeon(),
+        quantity: cartItem.quantity.toString(),
+        revenue: cartItem.revenue.toPigeon(),
+        referrer: cartItem.referrer?.toPigeon(),
+      ),
   ECommerceOrder: (ECommerceOrder order) => ECommerceOrderPigeon(
       identifier: order.identifier,
       items: order.items.map((e) => e.toPigeon()).toList(),
       payload: order.payload),
   ECommerceAmount: (ECommerceAmount amount) => ECommerceAmountPigeon(
-      amount: amount.amount.toString(), currency: amount.currency),
+        amount: amount.amount.toString(),
+        currency: amount.currency,
+      ),
   ECommercePrice: (ECommercePrice price) => ECommercePricePigeon(
-      fiat: price.fiat.toPigeon(),
-      internalComponents:
-          price.internalComponents?.map((e) => e.toPigeon()).toList())
+        fiat: price.fiat.toPigeon(),
+        internalComponents:
+            price.internalComponents?.map((e) => e.toPigeon()).toList(),
+      )
 };

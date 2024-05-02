@@ -68,14 +68,15 @@ ErrorDetailsPigeon convertErrorDetails(
 
 extension LocationConverter on Location {
   LocationPigeon toPigeon() => LocationPigeon(
-      latitude: latitude,
-      longitude: longitude,
-      provider: provider,
-      altitude: altitude,
-      accuracy: accuracy,
-      course: course,
-      speed: speed,
-      timestamp: timestamp);
+        latitude: latitude,
+        longitude: longitude,
+        provider: provider,
+        altitude: altitude,
+        accuracy: accuracy,
+        course: course,
+        speed: speed,
+        timestamp: timestamp,
+      );
 }
 
 extension PreloadInfoConverter on PreloadInfo {
@@ -85,46 +86,46 @@ extension PreloadInfoConverter on PreloadInfo {
 
 extension ConfigConverter on AppMetricaConfig {
   AppMetricaConfigPigeon toPigeon() => AppMetricaConfigPigeon(
-    apiKey: apiKey,
-    anrMonitoring: anrMonitoring,
-    anrMonitoringTimeout: anrMonitoringTimeout,
-    appBuildNumber: appBuildNumber,
-    appEnvironment: appEnvironment,
-    appOpenTrackingEnabled: appOpenTrackingEnabled,
-    appVersion: appVersion,
-    crashReporting: crashReporting,
-    customHosts: customHosts,
-    dataSendingEnabled: dataSendingEnabled,
-    deviceType: deviceType,
-    dispatchPeriodSeconds: dispatchPeriodSeconds,
-    errorEnvironment: errorEnvironment,
-    firstActivationAsUpdate: firstActivationAsUpdate,
-    location: location?.toPigeon(),
-    locationTracking: locationTracking,
-    logs: logs,
-    maxReportsCount: maxReportsCount,
-    maxReportsInDatabaseCount: maxReportsInDatabaseCount,
-    nativeCrashReporting: nativeCrashReporting,
-    preloadInfo: preloadInfo?.toPigeon(),
-    revenueAutoTrackingEnabled: revenueAutoTrackingEnabled,
-    sessionTimeout: sessionTimeout,
-    sessionsAutoTrackingEnabled: sessionsAutoTrackingEnabled,
-    userProfileID: userProfileID,
-  );
+        apiKey: apiKey,
+        anrMonitoring: anrMonitoring,
+        anrMonitoringTimeout: anrMonitoringTimeout,
+        appBuildNumber: appBuildNumber,
+        appEnvironment: appEnvironment,
+        appOpenTrackingEnabled: appOpenTrackingEnabled,
+        appVersion: appVersion,
+        crashReporting: crashReporting,
+        customHosts: customHosts,
+        dataSendingEnabled: dataSendingEnabled,
+        deviceType: deviceType,
+        dispatchPeriodSeconds: dispatchPeriodSeconds,
+        errorEnvironment: errorEnvironment,
+        firstActivationAsUpdate: firstActivationAsUpdate,
+        location: location?.toPigeon(),
+        locationTracking: locationTracking,
+        logs: logs,
+        maxReportsCount: maxReportsCount,
+        maxReportsInDatabaseCount: maxReportsInDatabaseCount,
+        nativeCrashReporting: nativeCrashReporting,
+        preloadInfo: preloadInfo?.toPigeon(),
+        revenueAutoTrackingEnabled: revenueAutoTrackingEnabled,
+        sessionTimeout: sessionTimeout,
+        sessionsAutoTrackingEnabled: sessionsAutoTrackingEnabled,
+        userProfileID: userProfileID,
+      );
 }
 
 extension ReporterConfigConverter on ReporterConfig {
   ReporterConfigPigeon toPigeon() => ReporterConfigPigeon(
-    apiKey: apiKey,
-    appEnvironment: appEnvironment,
-    dataSendingEnabled: dataSendingEnabled,
-    dispatchPeriodSeconds: dispatchPeriodSeconds,
-    logs: logs,
-    maxReportsCount: maxReportsCount,
-    maxReportsInDatabaseCount: maxReportsInDatabaseCount,
-    sessionTimeout: sessionTimeout,
-    userProfileID: userProfileID,
-  );
+        apiKey: apiKey,
+        appEnvironment: appEnvironment,
+        dataSendingEnabled: dataSendingEnabled,
+        dispatchPeriodSeconds: dispatchPeriodSeconds,
+        logs: logs,
+        maxReportsCount: maxReportsCount,
+        maxReportsInDatabaseCount: maxReportsInDatabaseCount,
+        sessionTimeout: sessionTimeout,
+        userProfileID: userProfileID,
+      );
 }
 
 final adTypeToPigeon = {

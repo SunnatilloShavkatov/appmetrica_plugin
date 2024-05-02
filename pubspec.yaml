@@ -10,11 +10,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  stack_trace: ^1.11.1
-  logging: ^1.2.0
-  decimal: ^2.3.3
 
 dev_dependencies:
+  flutter_lints: ^3.0.2
   pigeon: ^18.0.0
   flutter_test:
     sdk: flutter

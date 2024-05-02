@@ -6,8 +6,6 @@
  * https://yandex.com/legal/appmetrica_sdk_agreement/
  */
 
-import 'package:decimal/decimal.dart';
-
 /// The class to store Ad Revenue data. You can set:
 /// * [adRevenue] - amount of money received via ad revenue (it cannot be negative);
 /// * [currency] - Currency in which money from [adRevenue] is represented;
@@ -20,7 +18,7 @@ import 'package:decimal/decimal.dart';
 /// * [precision] - precision. Example: "publisher_defined", "estimated". Maximum length is 100 symbols;
 /// * [payload] - arbitrary payload: additional info represented as key-value pairs. Maximum size is 30 KB.
 class AdRevenue {
-  final Decimal adRevenue;
+  final String adRevenue;
   final String currency;
   final AdType? adType;
   final String? adNetwork;

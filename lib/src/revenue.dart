@@ -6,8 +6,6 @@
  * https://yandex.com/legal/appmetrica_sdk_agreement/
  */
 
-import 'package:decimal/decimal.dart';
-
 /// The class contains information about income from in-app purchases. You can set:
 /// * [price] - cost. It can be negative, for example, for a refund;
 /// * [currency] - the currency code of the purchase according to the standard [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217);
@@ -17,7 +15,7 @@ import 'package:decimal/decimal.dart';
 /// * [receipt] — in-app purchase information from Google Play/App Store;
 /// * [transactionID] - ID of the purchase transaction in the App Store. This parameter is relevant only for iOS.
 class Revenue {
-  final Decimal price;
+  final String price;
   final String currency;
   final int? quantity;
   final String? productId;
@@ -26,12 +24,15 @@ class Revenue {
   final String? transactionId;
 
   /// Creates an object with information about income from in-app purchases. The parameters [price], [currency] are required.
-  Revenue(this.price, this.currency,
-      {this.quantity,
-      this.productId,
-      this.payload,
-      this.receipt,
-      this.transactionId});
+  Revenue(
+    this.price,
+    this.currency, {
+    this.quantity,
+    this.productId,
+    this.payload,
+    this.receipt,
+    this.transactionId,
+  });
 }
 
 /// The class contains information about the purchase:

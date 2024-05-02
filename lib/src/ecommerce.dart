@@ -6,15 +6,13 @@
  * https://yandex.com/legal/appmetrica_sdk_agreement/
  */
 
-import 'package:decimal/decimal.dart';
-
 import 'ecommerce_event.dart';
 
 /// Class with cost information. You can set:
 /// * [amount] - quantity of goods, numeric value;
 /// * [currency] — units of measurement.
 class ECommerceAmount {
-  final Decimal amount;
+  final String amount;
   final String currency;
 
   /// Creates an object with cost information. All parameters are required.
@@ -39,14 +37,15 @@ class ECommerceProduct {
   final List<String>? promocodes;
 
   /// Creates an object with information about the product. [sku] is a required parameter.
-  const ECommerceProduct(
-      {required this.sku,
-      this.name,
-      this.categoriesPath,
-      this.payload,
-      this.actualPrice,
-      this.originalPrice,
-      this.promocodes});
+  const ECommerceProduct({
+    required this.sku,
+    this.name,
+    this.categoriesPath,
+    this.payload,
+    this.actualPrice,
+    this.originalPrice,
+    this.promocodes,
+  });
 }
 
 /// Class with information about the price of the product:
@@ -96,16 +95,17 @@ class ECommerceScreen {
 /// * [referrer] — the source of the transition to the basket.
 class ECommerceCartItem {
   final ECommerceProduct product;
-  final Decimal quantity;
+  final String quantity;
   final ECommercePrice revenue;
   final ECommerceReferrer? referrer;
 
   /// Creates an object with information about the product in the cart. The parameters [product], [quantity], [revenue] are required.
-  const ECommerceCartItem(
-      {required this.product,
-      required this.quantity,
-      required this.revenue,
-      this.referrer});
+  const ECommerceCartItem({
+    required this.product,
+    required this.quantity,
+    required this.revenue,
+    this.referrer,
+  });
 }
 
 /// Class with order information:
@@ -118,8 +118,11 @@ class ECommerceOrder {
   final Map<String, String>? payload;
 
   /// Creates an object with order information. The parameters [identifier], [items] are required.
-  const ECommerceOrder(
-      {required this.identifier, required this.items, this.payload});
+  const ECommerceOrder({
+    required this.identifier,
+    required this.items,
+    this.payload,
+  });
 }
 
 /// Class for creating E-Commerce events of various types.

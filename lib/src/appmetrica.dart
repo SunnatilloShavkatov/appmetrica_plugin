@@ -8,20 +8,17 @@
 
 import 'dart:async';
 import 'dart:convert';
-
+import 'dart:developer' as developer;
 import 'package:flutter/widgets.dart';
-import 'package:logging/logging.dart';
 
 import 'activation_config_holder.dart';
 import 'ad_revenue.dart';
 import 'appmetrica_api_pigeon.dart';
 import 'appmetrica_config.dart';
-import 'common_utils.dart';
 import 'deferred_deeplink_result.dart';
 import 'ecommerce_event.dart';
 import 'error_description.dart';
 import 'location.dart';
-import 'logging.dart';
 import 'pigeon_converter.dart';
 import 'profile/attribute.dart';
 import 'reporter/reporter.dart';
@@ -42,19 +39,16 @@ class AppMetrica {
 
   static final AppMetricaPigeon _appMetrica = AppMetricaPigeon();
 
-  static final _logger = Logger("$appMetricaRootLoggerName.MainFacade");
+  // static final _logger = Logger("$appMetricaRootLoggerName.MainFacade");
 
   /// Initializes the library in the application with the initial configuration [config].
   static Future<void> activate(AppMetricaConfig config) async {
-    if (config.logs == true) {
-      setUpLogger(appMetricaRootLogger);
-    }
     setUpErrorHandlingWithAppMetrica();
     var activationCompleter = ActivationCompleter(config);
     return _appMetrica.activate(config.toPigeon()).then(
-        activationCompleter.complete,
-        onError: activationCompleter.onError
-    );
+          activationCompleter.complete,
+          onError: activationCompleter.onError,
+        );
   }
 
   /// Activates reporter with the [config] configuration.
@@ -122,13 +116,13 @@ class AppMetrica {
   /// Sends an error message [message] with the description [errorDescription].
   /// If there is no [errorDescription] description, the current stacktrace will be automatically added.
   static Future<void> reportError(
-      {String? message, AppMetricaErrorDescription? errorDescription}) =>
+          {String? message, AppMetricaErrorDescription? errorDescription}) =>
       _appMetrica.reportError(
           errorDescription.tryToAddCurrentTrace().toPigeon(), message);
 
   /// Sends an error message with its own identifier [groupId]. Errors in reports are grouped by it.
   static Future<void> reportErrorWithGroup(String groupId,
-      {AppMetricaErrorDescription? errorDescription, String? message}) =>
+          {AppMetricaErrorDescription? errorDescription, String? message}) =>
       _appMetrica.reportErrorWithGroup(
           groupId, errorDescription?.toPigeon(), message);
 
@@ -138,12 +132,12 @@ class AppMetrica {
 
   /// Sends an event message in JSON format [attributesJson] as a string and a short name or description of the event [eventName].
   static Future<void> reportEventWithJson(
-      String eventName, String? attributesJson) =>
+          String eventName, String? attributesJson) =>
       _appMetrica.reportEventWithJson(eventName, attributesJson);
 
   /// Sends an event message as a set of attributes [attributes] Map and a short name or description of the event [eventName].
   static Future<void> reportEventWithMap(
-      String eventName, Map<String, Object>? attributes) =>
+          String eventName, Map<String, Object>? attributes) =>
       _appMetrica.reportEventWithJson(eventName, jsonEncode(attributes));
 
   /// Sets the [referralUrl] of the application installation.
@@ -158,7 +152,7 @@ class AppMetrica {
 
   /// Sends an event with an unhandled exception [errorDescription].
   static Future<void> reportUnhandledException(
-      AppMetricaErrorDescription errorDescription) =>
+          AppMetricaErrorDescription errorDescription) =>
       _appMetrica.reportUnhandledException(errorDescription.toPigeon());
 
   /// Sends information about updating the user profile using the [userProfile] parameter.
@@ -210,8 +204,9 @@ class AppMetrica {
         }
       });
 
-  static Future<StartupParams> requestStartupParams(List<String>? params)  =>
-      _appMetrica.requestStartupParams(params ?? [])
+  static Future<StartupParams> requestStartupParams(List<String>? params) =>
+      _appMetrica
+          .requestStartupParams(params ?? [])
           .then((value) => value.toDart());
 
   /// Resumes the foreground session or creates a new one if the session timeout has expired.
@@ -253,13 +248,12 @@ class AppMetrica {
       WidgetsFlutterBinding.ensureInitialized();
       callback();
     }, (Object err, StackTrace stack) {
-      _logger.warning("error caught by Zone", err, stack);
+      developer.log("error caught by Zone", error: err, stackTrace: stack);
       if (ActivationConfigHolder.lastActivationConfig != null) {
-        _appMetrica.reportUnhandledException(convertErrorDetails(
-            err.runtimeType.toString(),
-            err.toString(),
-            stack
-        )).ignore();
+        _appMetrica
+            .reportUnhandledException(convertErrorDetails(
+                err.runtimeType.toString(), err.toString(), stack))
+            .ignore();
       }
     });
   }
@@ -272,12 +266,18 @@ void setUpErrorHandlingWithAppMetrica() {
     _crashHandlingActivated = true;
     final prev = FlutterError.onError;
     FlutterError.onError = (FlutterErrorDetails details) async {
-      AppMetrica._logger.warning("error caught by handler ${details.summary}",
-          details.exception, details.stack);
-      await AppMetrica._appMetrica.reportUnhandledException(convertErrorDetails(
+      developer.log(
+        "error caught by Zone",
+        error: details.exception,
+        stackTrace: details.stack,
+      );
+      await AppMetrica._appMetrica.reportUnhandledException(
+        convertErrorDetails(
           details.exception.runtimeType.toString(),
           details.summary.toString(),
-          details.stack));
+          details.stack,
+        ),
+      );
       if (prev != null) {
         prev(details);
       }
