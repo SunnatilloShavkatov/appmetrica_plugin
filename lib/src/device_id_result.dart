@@ -8,8 +8,8 @@
 
 /// Exception when requesting a unique AppMetrica ID.
 class DeviceIdRequestException implements Exception {
-  final DeviceIdErrorReason reason;
   DeviceIdRequestException(this.reason);
+  final DeviceIdErrorReason reason;
 }
 
 /// Contains possible error values when requesting a unique AppMetrica identifier:

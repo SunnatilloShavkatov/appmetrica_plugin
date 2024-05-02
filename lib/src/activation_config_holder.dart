@@ -1,13 +1,7 @@
-/*
- * Version for Flutter
- * © 2022
- * You may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * https://yandex.com/legal/appmetrica_sdk_agreement/
- */
+// ignore_for_file: avoid_annotating_with_dynamic
 
-import 'package:appmetrica_plugin/src/appmetrica_api_pigeon.dart';
-import '../appmetrica_plugin.dart';
+import "package:appmetrica_plugin/appmetrica_plugin.dart";
+import "package:appmetrica_plugin/src/appmetrica_api_pigeon.dart";
 
 class ActivationConfigHolder {
   ActivationConfigHolder._();
@@ -32,9 +26,9 @@ class ActivationConfigHolder {
 }
 
 class ActivationCompleter {
-  final AppMetricaConfig config;
-
   ActivationCompleter(this.config);
+
+  final AppMetricaConfig config;
 
   Future<dynamic> complete(dynamic value) {
     _startFirstAutoTrackedSession(config.sessionsAutoTrackingEnabled);
@@ -62,7 +56,9 @@ class ActivationCompleter {
     if (ActivationConfigHolder.activated || false == appOpenTrackingEnabled) {
       return Future.value();
     } else {
-      return InitialDeepLinkHolderPigeon().getInitialDeeplink().then((value) {
+      return InitialDeepLinkHolderPigeon()
+          .getInitialDeeplink()
+          .then((String? value) {
         if (value != null) {
           AppMetricaPigeon().reportAppOpen(value);
         }

@@ -6,11 +6,11 @@
  * https://yandex.com/legal/appmetrica_sdk_agreement/
  */
 
-import 'dart:io';
+import "dart:io";
 
-import 'package:appmetrica_plugin/src/appmetrica_api_pigeon.dart';
-import 'package:stack_trace/stack_trace.dart';
-import 'package:appmetrica_plugin/appmetrica_plugin.dart';
+import "package:appmetrica_plugin/appmetrica_plugin.dart";
+import "package:appmetrica_plugin/src/appmetrica_api_pigeon.dart";
+import "package:stack_trace/stack_trace.dart";
 
 extension ReceiptConverter on Receipt {
   ReceiptPigeon toPigeon() => ReceiptPigeon(data: data, signature: signature);
@@ -18,27 +18,30 @@ extension ReceiptConverter on Receipt {
 
 extension RevenueConverter on Revenue {
   RevenuePigeon toPigeon() => RevenuePigeon(
-      price: price.toString(),
-      currency: currency,
-      productId: productId,
-      quantity: quantity,
-      payload: payload,
-      transactionId: transactionId,
-      receipt: receipt?.toPigeon());
+        price: price,
+        currency: currency,
+        productId: productId,
+        quantity: quantity,
+        payload: payload,
+        transactionId: transactionId,
+        receipt: receipt?.toPigeon(),
+      );
 }
 
 List<StackTraceElementPigeon> convertErrorStackTrace(StackTrace stack) {
-  final backtrace = Trace.from(stack).frames.map((element) {
-    final firstDot = element.member?.indexOf(".") ?? -1;
-    final className =
+  final Iterable<StackTraceElementPigeon> backtrace =
+      Trace.from(stack).frames.map((Frame element) {
+    final int firstDot = element.member?.indexOf(".") ?? -1;
+    final String? className =
         firstDot >= 0 ? element.member?.substring(0, firstDot) : null;
-    final methodName = element.member?.substring(firstDot + 1);
+    final String? methodName = element.member?.substring(firstDot + 1);
     return StackTraceElementPigeon(
-        className: className ?? "",
-        methodName: methodName ?? "",
-        fileName: element.library,
-        line: element.line ?? 0,
-        column: element.column ?? 0);
+      className: className ?? "",
+      methodName: methodName ?? "",
+      fileName: element.library,
+      line: element.line ?? 0,
+      column: element.column ?? 0,
+    );
   });
   return backtrace.toList(growable: false);
 }
@@ -59,12 +62,18 @@ extension AppMetricaErrorDescriptionSerializer on AppMetricaErrorDescription {
 }
 
 ErrorDetailsPigeon convertErrorDetails(
-        String clazz, String? msg, StackTrace? stack) =>
+  String clazz,
+  String? msg,
+  StackTrace? stack,
+) =>
     ErrorDetailsPigeon(
-        exceptionClass: clazz,
-        message: msg,
-        dartVersion: Platform.version,
-        backtrace: stack != null ? convertErrorStackTrace(stack) : []);
+      exceptionClass: clazz,
+      message: msg,
+      dartVersion: Platform.version,
+      backtrace: stack != null
+          ? convertErrorStackTrace(stack)
+          : <StackTraceElementPigeon?>[],
+    );
 
 extension LocationConverter on Location {
   LocationPigeon toPigeon() => LocationPigeon(
@@ -128,7 +137,7 @@ extension ReporterConfigConverter on ReporterConfig {
       );
 }
 
-final adTypeToPigeon = {
+final Map<AdType, AdTypePigeon> adTypeToPigeon = <AdType, AdTypePigeon>{
   AdType.UNKNOWN: AdTypePigeon.UNKNOWN,
   AdType.NATIVE: AdTypePigeon.NATIVE,
   AdType.BANNER: AdTypePigeon.BANNER,
@@ -140,7 +149,7 @@ final adTypeToPigeon = {
 
 extension AdRevenueConverter on AdRevenue {
   AdRevenuePigeon toPigeon() => AdRevenuePigeon(
-        adRevenue: adRevenue.toString(),
+        adRevenue: adRevenue,
         currency: currency,
         adType: adTypeToPigeon[adType],
         adNetwork: adNetwork,

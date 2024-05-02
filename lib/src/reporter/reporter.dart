@@ -6,11 +6,11 @@
  * https://yandex.com/legal/appmetrica_sdk_agreement/
  */
 
-import '../ad_revenue.dart';
-import '../ecommerce_event.dart';
-import '../error_description.dart';
-import '../profile/attribute.dart';
-import '../revenue.dart';
+import "package:appmetrica_plugin/src/ad_revenue.dart";
+import "package:appmetrica_plugin/src/ecommerce_event.dart";
+import "package:appmetrica_plugin/src/error_description.dart";
+import "package:appmetrica_plugin/src/profile/attribute.dart";
+import "package:appmetrica_plugin/src/revenue.dart";
 
 abstract class Reporter {
   Future<void> clearAppEnvironment();
@@ -30,14 +30,14 @@ abstract class Reporter {
   /// If there is no [errorDescription] description, the current stacktrace will be added automatically.
   Future<void> reportError({
     String? message,
-    AppMetricaErrorDescription? errorDescription
+    AppMetricaErrorDescription? errorDescription,
   });
 
   /// Sends an error with its own identifier [groupId]. Errors in reports are grouped by it.
   Future<void> reportErrorWithGroup(
       String groupId, {
         AppMetricaErrorDescription? errorDescription,
-        String? message
+        String? message,
       });
 
   /// Sends a custom event message.

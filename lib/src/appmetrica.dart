@@ -6,36 +6,37 @@
  * https://yandex.com/legal/appmetrica_sdk_agreement/
  */
 
-import 'dart:async';
-import 'dart:convert';
-import 'dart:developer' as developer;
-import 'package:flutter/widgets.dart';
+import "dart:async";
+import "dart:convert";
+import "dart:developer" as developer;
 
-import 'activation_config_holder.dart';
-import 'ad_revenue.dart';
-import 'appmetrica_api_pigeon.dart';
-import 'appmetrica_config.dart';
-import 'deferred_deeplink_result.dart';
-import 'ecommerce_event.dart';
-import 'error_description.dart';
-import 'location.dart';
-import 'pigeon_converter.dart';
-import 'profile/attribute.dart';
-import 'reporter/reporter.dart';
-import 'reporter/reporter_config.dart';
-import 'reporter/reporter_storage.dart';
-import 'revenue.dart';
-import 'startup_params.dart';
-import 'to_dart_converter.dart';
+import "package:appmetrica_plugin/src/activation_config_holder.dart";
+import "package:appmetrica_plugin/src/ad_revenue.dart";
+import "package:appmetrica_plugin/src/appmetrica_api_pigeon.dart";
+import "package:appmetrica_plugin/src/appmetrica_config.dart";
+import "package:appmetrica_plugin/src/deferred_deeplink_result.dart";
+import "package:appmetrica_plugin/src/ecommerce_event.dart";
+import "package:appmetrica_plugin/src/error_description.dart";
+import "package:appmetrica_plugin/src/location.dart";
+import "package:appmetrica_plugin/src/pigeon_converter.dart";
+import "package:appmetrica_plugin/src/profile/attribute.dart";
+import "package:appmetrica_plugin/src/reporter/reporter.dart";
+import "package:appmetrica_plugin/src/reporter/reporter_config.dart";
+import "package:appmetrica_plugin/src/reporter/reporter_storage.dart";
+import "package:appmetrica_plugin/src/revenue.dart";
+import "package:appmetrica_plugin/src/startup_params.dart";
+import "package:appmetrica_plugin/src/to_dart_converter.dart";
+import "package:flutter/foundation.dart";
+import "package:flutter/widgets.dart";
 
-const _deeplink_plugin_error =
+const String _deeplink_plugin_error =
     "Unable to retrieve deeplink from native library";
 
 /// The class contains methods for working with the library.
 class AppMetrica {
   AppMetrica._();
 
-  static final _reporterStorage = ReporterStorage();
+  static final ReporterStorage _reporterStorage = ReporterStorage();
 
   static final AppMetricaPigeon _appMetrica = AppMetricaPigeon();
 
@@ -44,7 +45,7 @@ class AppMetrica {
   /// Initializes the library in the application with the initial configuration [config].
   static Future<void> activate(AppMetricaConfig config) async {
     setUpErrorHandlingWithAppMetrica();
-    var activationCompleter = ActivationCompleter(config);
+    final ActivationCompleter activationCompleter = ActivationCompleter(config);
     return _appMetrica.activate(config.toPigeon()).then(
           activationCompleter.complete,
           onError: activationCompleter.onError,
@@ -87,9 +88,7 @@ class AppMetrica {
   /// Use the method only when session auto-tracking is disabled [AppMetricaConfig.sessionsAutoTracking].
   static Future<void> pauseSession() => _appMetrica.pauseSession();
 
-  static Future<void> putAppEnvironmentValue(String key, String? value) {
-    return _appMetrica.putAppEnvironmentValue(key, value);
-  }
+  static Future<void> putAppEnvironmentValue(String key, String? value) => _appMetrica.putAppEnvironmentValue(key, value);
 
   /// Adds a [key]-[value] pair to or deletes it from the application error environment. The environment is shown in the crash and error report.
   ///
@@ -116,15 +115,15 @@ class AppMetrica {
   /// Sends an error message [message] with the description [errorDescription].
   /// If there is no [errorDescription] description, the current stacktrace will be automatically added.
   static Future<void> reportError(
-          {String? message, AppMetricaErrorDescription? errorDescription}) =>
+          {String? message, AppMetricaErrorDescription? errorDescription,}) =>
       _appMetrica.reportError(
-          errorDescription.tryToAddCurrentTrace().toPigeon(), message);
+          errorDescription.tryToAddCurrentTrace().toPigeon(), message,);
 
   /// Sends an error message with its own identifier [groupId]. Errors in reports are grouped by it.
   static Future<void> reportErrorWithGroup(String groupId,
-          {AppMetricaErrorDescription? errorDescription, String? message}) =>
+          {AppMetricaErrorDescription? errorDescription, String? message,}) =>
       _appMetrica.reportErrorWithGroup(
-          groupId, errorDescription?.toPigeon(), message);
+          groupId, errorDescription?.toPigeon(), message,);
 
   /// Sends an event message with a short name or description of the event [eventName].
   static Future<void> reportEvent(String eventName) =>
@@ -132,12 +131,12 @@ class AppMetrica {
 
   /// Sends an event message in JSON format [attributesJson] as a string and a short name or description of the event [eventName].
   static Future<void> reportEventWithJson(
-          String eventName, String? attributesJson) =>
+          String eventName, String? attributesJson,) =>
       _appMetrica.reportEventWithJson(eventName, attributesJson);
 
   /// Sends an event message as a set of attributes [attributes] Map and a short name or description of the event [eventName].
   static Future<void> reportEventWithMap(
-          String eventName, Map<String, Object>? attributes) =>
+          String eventName, Map<String, Object>? attributes,) =>
       _appMetrica.reportEventWithJson(eventName, jsonEncode(attributes));
 
   /// Sets the [referralUrl] of the application installation.
@@ -152,7 +151,7 @@ class AppMetrica {
 
   /// Sends an event with an unhandled exception [errorDescription].
   static Future<void> reportUnhandledException(
-          AppMetricaErrorDescription errorDescription) =>
+          AppMetricaErrorDescription errorDescription,) =>
       _appMetrica.reportUnhandledException(errorDescription.toPigeon());
 
   /// Sends information about updating the user profile using the [userProfile] parameter.
@@ -163,19 +162,19 @@ class AppMetrica {
   ///
   /// Relevant only for Android. For iOS, it returns the unknown error.
   static Future<String> requestDeferredDeeplink() =>
-      _appMetrica.requestDeferredDeeplink().then((value) {
-        final error = value.error;
+      _appMetrica.requestDeferredDeeplink().then((AppMetricaDeferredDeeplinkPigeon value) {
+        final AppMetricaDeferredDeeplinkErrorPigeon? error = value.error;
         if (error != null &&
             error.reason != AppMetricaDeferredDeeplinkReasonPigeon.NO_ERROR) {
           throw DeferredDeeplinkRequestException(
               _deferredDeeplinkErrortoDart(error.reason),
               error.description,
-              error.message);
+              error.message,);
         } else if (value.deeplink == null) {
           throw DeferredDeeplinkRequestException(
               DeferredDeeplinkErrorReason.unknown,
               _deeplink_plugin_error,
-              error?.message);
+              error?.message,);
         } else {
           return value.deeplink!;
         }
@@ -185,29 +184,29 @@ class AppMetrica {
   ///
   /// Relevant only for Android. For iOS, it returns the unknown error.
   static Future<Map<String, String>> requestDeferredDeeplinkParameters() =>
-      _appMetrica.requestDeferredDeeplinkParameters().then((value) {
-        final error = value.error;
+      _appMetrica.requestDeferredDeeplinkParameters().then((AppMetricaDeferredDeeplinkParametersPigeon value) {
+        final AppMetricaDeferredDeeplinkErrorPigeon? error = value.error;
         if (error != null &&
             error.reason != AppMetricaDeferredDeeplinkReasonPigeon.NO_ERROR) {
           throw DeferredDeeplinkRequestException(
               _deferredDeeplinkErrortoDart(error.reason),
               error.description,
-              error.message);
+              error.message,);
         } else if (value.parameters == null) {
           throw DeferredDeeplinkRequestException(
               DeferredDeeplinkErrorReason.unknown,
               _deeplink_plugin_error,
-              error?.message);
+              error?.message,);
         } else {
           return value.parameters!
-              .map((key, value) => MapEntry(key as String, value as String));
+              .map((String? key, String? value) => MapEntry(key!, value!));
         }
       });
 
   static Future<StartupParams> requestStartupParams(List<String>? params) =>
       _appMetrica
-          .requestStartupParams(params ?? [])
-          .then((value) => value.toDart());
+          .requestStartupParams(params ?? <String?>[])
+          .then((StartupParamsPigeon value) => value.toDart());
 
   /// Resumes the foreground session or creates a new one if the session timeout has expired.
   ///
@@ -252,19 +251,19 @@ class AppMetrica {
       if (ActivationConfigHolder.lastActivationConfig != null) {
         _appMetrica
             .reportUnhandledException(convertErrorDetails(
-                err.runtimeType.toString(), err.toString(), stack))
+                err.runtimeType.toString(), err.toString(), stack,),)
             .ignore();
       }
     });
   }
 }
 
-var _crashHandlingActivated = false;
+bool _crashHandlingActivated = false;
 
 void setUpErrorHandlingWithAppMetrica() {
   if (!_crashHandlingActivated) {
     _crashHandlingActivated = true;
-    final prev = FlutterError.onError;
+    final FlutterExceptionHandler? prev = FlutterError.onError;
     FlutterError.onError = (FlutterErrorDetails details) async {
       developer.log(
         "error caught by Zone",
@@ -286,7 +285,7 @@ void setUpErrorHandlingWithAppMetrica() {
 }
 
 DeferredDeeplinkErrorReason _deferredDeeplinkErrortoDart(
-    AppMetricaDeferredDeeplinkReasonPigeon error) {
+    AppMetricaDeferredDeeplinkReasonPigeon error,) {
   switch (error) {
     case AppMetricaDeferredDeeplinkReasonPigeon.NOT_A_FIRST_LAUNCH:
       return DeferredDeeplinkErrorReason.notAFirstLaunch;

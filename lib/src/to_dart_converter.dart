@@ -1,5 +1,5 @@
-import 'package:appmetrica_plugin/src/appmetrica_api_pigeon.dart';
-import 'package:appmetrica_plugin/appmetrica_plugin.dart';
+import "package:appmetrica_plugin/appmetrica_plugin.dart";
+import "package:appmetrica_plugin/src/appmetrica_api_pigeon.dart";
 
 extension StartupParamsItemStatusConverter on StartupParamsItemStatusPigeon {
   StartupParamsItemStatus toDart() {
@@ -23,27 +23,23 @@ extension StartupParamsItemStatusConverter on StartupParamsItemStatusPigeon {
 }
 
 extension StartupParamsItemConverter on StartupParamsItemPigeon {
-  StartupParamsItem toDart() {
-    return StartupParamsItem(
+  StartupParamsItem toDart() => StartupParamsItem(
       id: id,
       status: status.toDart(),
       errorDetails: errorDetails,
     );
-  }
 }
 
 extension StartupParamsResultConverter on StartupParamsResultPigeon {
-  StartupParamsResult toDart() {
-    return StartupParamsResult(
+  StartupParamsResult toDart() => StartupParamsResult(
       deviceId: deviceId,
       deviceIdHash: deviceIdHash,
-      parameters: parameters?.map((key, value) => MapEntry(
+      parameters: parameters?.map((String? key, StartupParamsItemPigeon? value) => MapEntry(
           key,
-          value?.toDart()
-      )),
+          value?.toDart(),
+      ),),
       uuid: uuid,
     );
-  }
 }
 
 extension StartupParamsReasonConverter on StartupParamsReasonPigeon {
@@ -62,10 +58,8 @@ extension StartupParamsReasonConverter on StartupParamsReasonPigeon {
 }
 
 extension StartupParamsConverter on StartupParamsPigeon {
-  StartupParams toDart() {
-    return StartupParams(
+  StartupParams toDart() => StartupParams(
       result: result?.toDart(),
       reason: reason?.toDart(),
     );
-  }
 }

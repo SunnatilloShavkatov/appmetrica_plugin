@@ -6,11 +6,10 @@
  * https://yandex.com/legal/appmetrica_sdk_agreement/
  */
 
-import 'package:appmetrica_plugin/src/appmetrica_api_pigeon.dart';
-import 'package:appmetrica_plugin/src/pigeon_converter.dart';
-
-import 'location.dart';
-import 'preload_info.dart';
+import "package:appmetrica_plugin/src/appmetrica_api_pigeon.dart";
+import "package:appmetrica_plugin/src/location.dart";
+import "package:appmetrica_plugin/src/pigeon_converter.dart";
+import "package:appmetrica_plugin/src/preload_info.dart";
 
 /// The class contains the starting configuration of the library.
 /// Configuration parameters are applied from the moment the library is initialized. You can set:
@@ -43,33 +42,6 @@ import 'preload_info.dart';
 /// * [sessionsAutoTrackingEnabled] — indicates automatic collection and sending of information about the sessions of the application user. The default value is true;
 /// * [userProfileID] — user profile ID;
 class AppMetricaConfig {
-  static final _converter = AppMetricaConfigConverterPigeon();
-
-  final String apiKey;
-  final bool? anrMonitoring;
-  final int? anrMonitoringTimeout;
-  final int? appBuildNumber;
-  final Map<String?, String?>? appEnvironment;
-  final bool? appOpenTrackingEnabled;
-  final String? appVersion;
-  final bool? crashReporting;
-  final List<String?>? customHosts;
-  final bool? dataSendingEnabled;
-  final String? deviceType;
-  final int? dispatchPeriodSeconds;
-  final Map<String?, String?>? errorEnvironment;
-  final bool? firstActivationAsUpdate;
-  final Location? location;
-  final bool? locationTracking;
-  final bool? logs;
-  final int? maxReportsCount;
-  final int? maxReportsInDatabaseCount;
-  final bool? nativeCrashReporting;
-  final PreloadInfo? preloadInfo;
-  final bool? revenueAutoTrackingEnabled;
-  final int? sessionTimeout;
-  final bool? sessionsAutoTrackingEnabled;
-  final String? userProfileID;
 
   /// Creates an AppMetrica library configuration object. [apiKey] is a required parameter.
   const AppMetricaConfig(
@@ -99,6 +71,33 @@ class AppMetricaConfig {
         this.sessionsAutoTrackingEnabled,
         this.userProfileID,
       });
+  static final AppMetricaConfigConverterPigeon _converter = AppMetricaConfigConverterPigeon();
+
+  final String apiKey;
+  final bool? anrMonitoring;
+  final int? anrMonitoringTimeout;
+  final int? appBuildNumber;
+  final Map<String?, String?>? appEnvironment;
+  final bool? appOpenTrackingEnabled;
+  final String? appVersion;
+  final bool? crashReporting;
+  final List<String?>? customHosts;
+  final bool? dataSendingEnabled;
+  final String? deviceType;
+  final int? dispatchPeriodSeconds;
+  final Map<String?, String?>? errorEnvironment;
+  final bool? firstActivationAsUpdate;
+  final Location? location;
+  final bool? locationTracking;
+  final bool? logs;
+  final int? maxReportsCount;
+  final int? maxReportsInDatabaseCount;
+  final bool? nativeCrashReporting;
+  final PreloadInfo? preloadInfo;
+  final bool? revenueAutoTrackingEnabled;
+  final int? sessionTimeout;
+  final bool? sessionsAutoTrackingEnabled;
+  final String? userProfileID;
 
   Future<String> toJson() => _converter.toJson(toPigeon());
 }

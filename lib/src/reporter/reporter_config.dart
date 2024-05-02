@@ -18,16 +18,6 @@
 /// * [sessionTimeout] — session timeout in seconds. The default value is 10 (the minimum allowed value);
 /// * [userProfileID] - user profile identifier (profileId) upon activation;
 class ReporterConfig {
-  final String apiKey;
-
-  final Map<String?, String?>? appEnvironment;
-  final bool? dataSendingEnabled;
-  final int? dispatchPeriodSeconds;
-  final bool? logs;
-  final int? maxReportsCount;
-  final int? maxReportsInDatabaseCount;
-  final int? sessionTimeout;
-  final String? userProfileID;
 
   /// Creates an object of the [ReporterConfig] class - the reporter configuration constructor. [apiKey] is a required parameter.
   const ReporterConfig(
@@ -39,6 +29,16 @@ class ReporterConfig {
       this.maxReportsCount,
       this.maxReportsInDatabaseCount,
       this.sessionTimeout,
-      this.userProfileID
+      this.userProfileID,
 });
+  final String apiKey;
+
+  final Map<String?, String?>? appEnvironment;
+  final bool? dataSendingEnabled;
+  final int? dispatchPeriodSeconds;
+  final bool? logs;
+  final int? maxReportsCount;
+  final int? maxReportsInDatabaseCount;
+  final int? sessionTimeout;
+  final String? userProfileID;
 }

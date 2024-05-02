@@ -8,22 +8,18 @@ enum StartupParamsItemStatus {
 }
 
 class StartupParamsItem {
-  final String? id;
-  final StartupParamsItemStatus status;
-  final String? errorDetails;
 
   const StartupParamsItem({
     this.id,
       this.status = StartupParamsItemStatus.UNKNOWN_ERROR,
       this.errorDetails,
   });
+  final String? id;
+  final StartupParamsItemStatus status;
+  final String? errorDetails;
 }
 
 class StartupParamsResult {
-  final String? deviceId;
-  final String? deviceIdHash;
-  final Map<String?, StartupParamsItem?>? parameters;
-  final String? uuid;
 
   const StartupParamsResult({
     this.deviceId,
@@ -31,6 +27,10 @@ class StartupParamsResult {
     this.parameters,
     this.uuid,
   });
+  final String? deviceId;
+  final String? deviceIdHash;
+  final Map<String?, StartupParamsItem?>? parameters;
+  final String? uuid;
 }
 
 enum StartupParamsReason {
@@ -40,11 +40,11 @@ enum StartupParamsReason {
 }
 
 class StartupParams {
-  final StartupParamsResult? result;
-  final StartupParamsReason? reason;
 
   const StartupParams({
     this.result,
     this.reason,
 });
+  final StartupParamsResult? result;
+  final StartupParamsReason? reason;
 }

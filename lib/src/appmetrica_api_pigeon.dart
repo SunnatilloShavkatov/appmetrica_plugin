@@ -2,11 +2,11 @@
 // See also: https://pub.dev/packages/pigeon
 // ignore_for_file: public_member_api_docs, non_constant_identifier_names, avoid_as, unused_import, unnecessary_parenthesis, prefer_null_aware_operators, omit_local_variable_types, unused_shown_name, unnecessary_import
 
-import 'dart:async';
-import 'dart:typed_data' show Float64List, Int32List, Int64List, Uint8List;
+import "dart:async";
+import "dart:typed_data" show Float64List, Int32List, Int64List, Uint8List;
 
-import 'package:flutter/foundation.dart' show ReadBuffer, WriteBuffer;
-import 'package:flutter/services.dart';
+import "package:flutter/foundation.dart" show ReadBuffer, WriteBuffer;
+import "package:flutter/services.dart";
 
 enum AppMetricaDeferredDeeplinkReasonPigeon {
   NOT_A_FIRST_LAUNCH,
@@ -132,35 +132,33 @@ class AppMetricaConfigPigeon {
 
   String? userProfileID;
 
-  Object encode() {
-    return <Object?>[
-      apiKey,
-      anrMonitoring,
-      anrMonitoringTimeout,
-      appBuildNumber,
-      appEnvironment,
-      appOpenTrackingEnabled,
-      appVersion,
-      crashReporting,
-      customHosts,
-      dataSendingEnabled,
-      deviceType,
-      dispatchPeriodSeconds,
-      errorEnvironment,
-      firstActivationAsUpdate,
-      location?.encode(),
-      locationTracking,
-      logs,
-      maxReportsCount,
-      maxReportsInDatabaseCount,
-      nativeCrashReporting,
-      preloadInfo?.encode(),
-      revenueAutoTrackingEnabled,
-      sessionTimeout,
-      sessionsAutoTrackingEnabled,
-      userProfileID,
-    ];
-  }
+  Object encode() => <Object?>[
+        apiKey,
+        anrMonitoring,
+        anrMonitoringTimeout,
+        appBuildNumber,
+        appEnvironment,
+        appOpenTrackingEnabled,
+        appVersion,
+        crashReporting,
+        customHosts,
+        dataSendingEnabled,
+        deviceType,
+        dispatchPeriodSeconds,
+        errorEnvironment,
+        firstActivationAsUpdate,
+        location?.encode(),
+        locationTracking,
+        logs,
+        maxReportsCount,
+        maxReportsInDatabaseCount,
+        nativeCrashReporting,
+        preloadInfo?.encode(),
+        revenueAutoTrackingEnabled,
+        sessionTimeout,
+        sessionsAutoTrackingEnabled,
+        userProfileID,
+      ];
 
   static AppMetricaConfigPigeon decode(Object result) {
     result as List<Object?>;
@@ -169,7 +167,8 @@ class AppMetricaConfigPigeon {
       anrMonitoring: result[1] as bool?,
       anrMonitoringTimeout: result[2] as int?,
       appBuildNumber: result[3] as int?,
-      appEnvironment: (result[4] as Map<Object?, Object?>?)?.cast<String?, String?>(),
+      appEnvironment:
+          (result[4] as Map<Object?, Object?>?)?.cast<String?, String?>(),
       appOpenTrackingEnabled: result[5] as bool?,
       appVersion: result[6] as String?,
       crashReporting: result[7] as bool?,
@@ -177,7 +176,8 @@ class AppMetricaConfigPigeon {
       dataSendingEnabled: result[9] as bool?,
       deviceType: result[10] as String?,
       dispatchPeriodSeconds: result[11] as int?,
-      errorEnvironment: (result[12] as Map<Object?, Object?>?)?.cast<String?, String?>(),
+      errorEnvironment:
+          (result[12] as Map<Object?, Object?>?)?.cast<String?, String?>(),
       firstActivationAsUpdate: result[13] as bool?,
       location: result[14] != null
           ? LocationPigeon.decode(result[14]! as List<Object?>)
@@ -226,18 +226,16 @@ class LocationPigeon {
 
   int? timestamp;
 
-  Object encode() {
-    return <Object?>[
-      latitude,
-      longitude,
-      provider,
-      altitude,
-      accuracy,
-      course,
-      speed,
-      timestamp,
-    ];
-  }
+  Object encode() => <Object?>[
+        latitude,
+        longitude,
+        provider,
+        altitude,
+        accuracy,
+        course,
+        speed,
+        timestamp,
+      ];
 
   static LocationPigeon decode(Object result) {
     result as List<Object?>;
@@ -264,18 +262,17 @@ class PreloadInfoPigeon {
 
   Map<String?, String?>? additionalInfo;
 
-  Object encode() {
-    return <Object?>[
-      trackingId,
-      additionalInfo,
-    ];
-  }
+  Object encode() => <Object?>[
+        trackingId,
+        additionalInfo,
+      ];
 
   static PreloadInfoPigeon decode(Object result) {
     result as List<Object?>;
     return PreloadInfoPigeon(
       trackingId: result[0]! as String,
-      additionalInfo: (result[1] as Map<Object?, Object?>?)?.cast<String?, String?>(),
+      additionalInfo:
+          (result[1] as Map<Object?, Object?>?)?.cast<String?, String?>(),
     );
   }
 }
@@ -293,13 +290,11 @@ class AppMetricaDeferredDeeplinkErrorPigeon {
 
   String? message;
 
-  Object encode() {
-    return <Object?>[
-      reason.index,
-      description,
-      message,
-    ];
-  }
+  Object encode() => <Object?>[
+        reason.index,
+        description,
+        message,
+      ];
 
   static AppMetricaDeferredDeeplinkErrorPigeon decode(Object result) {
     result as List<Object?>;
@@ -321,19 +316,18 @@ class AppMetricaDeferredDeeplinkPigeon {
 
   AppMetricaDeferredDeeplinkErrorPigeon? error;
 
-  Object encode() {
-    return <Object?>[
-      deeplink,
-      error?.encode(),
-    ];
-  }
+  Object encode() => <Object?>[
+        deeplink,
+        error?.encode(),
+      ];
 
   static AppMetricaDeferredDeeplinkPigeon decode(Object result) {
     result as List<Object?>;
     return AppMetricaDeferredDeeplinkPigeon(
       deeplink: result[0] as String?,
       error: result[1] != null
-          ? AppMetricaDeferredDeeplinkErrorPigeon.decode(result[1]! as List<Object?>)
+          ? AppMetricaDeferredDeeplinkErrorPigeon.decode(
+              result[1]! as List<Object?>)
           : null,
     );
   }
@@ -349,19 +343,19 @@ class AppMetricaDeferredDeeplinkParametersPigeon {
 
   AppMetricaDeferredDeeplinkErrorPigeon? error;
 
-  Object encode() {
-    return <Object?>[
-      parameters,
-      error?.encode(),
-    ];
-  }
+  Object encode() => <Object?>[
+        parameters,
+        error?.encode(),
+      ];
 
   static AppMetricaDeferredDeeplinkParametersPigeon decode(Object result) {
     result as List<Object?>;
     return AppMetricaDeferredDeeplinkParametersPigeon(
-      parameters: (result[0] as Map<Object?, Object?>?)?.cast<String?, String?>(),
+      parameters:
+          (result[0] as Map<Object?, Object?>?)?.cast<String?, String?>(),
       error: result[1] != null
-          ? AppMetricaDeferredDeeplinkErrorPigeon.decode(result[1]! as List<Object?>)
+          ? AppMetricaDeferredDeeplinkErrorPigeon.decode(
+              result[1]! as List<Object?>)
           : null,
     );
   }
@@ -392,17 +386,15 @@ class RevenuePigeon {
 
   String? transactionId;
 
-  Object encode() {
-    return <Object?>[
-      price,
-      currency,
-      quantity,
-      productId,
-      payload,
-      receipt?.encode(),
-      transactionId,
-    ];
-  }
+  Object encode() => <Object?>[
+        price,
+        currency,
+        quantity,
+        productId,
+        payload,
+        receipt?.encode(),
+        transactionId,
+      ];
 
   static RevenuePigeon decode(Object result) {
     result as List<Object?>;
@@ -430,12 +422,10 @@ class ReceiptPigeon {
 
   String? signature;
 
-  Object encode() {
-    return <Object?>[
-      data,
-      signature,
-    ];
-  }
+  Object encode() => <Object?>[
+        data,
+        signature,
+      ];
 
   static ReceiptPigeon decode(Object result) {
     result as List<Object?>;
@@ -456,12 +446,10 @@ class ECommerceAmountPigeon {
 
   String currency;
 
-  Object encode() {
-    return <Object?>[
-      amount,
-      currency,
-    ];
-  }
+  Object encode() => <Object?>[
+        amount,
+        currency,
+      ];
 
   static ECommerceAmountPigeon decode(Object result) {
     result as List<Object?>;
@@ -497,17 +485,15 @@ class ECommerceProductPigeon {
 
   List<String?>? promocodes;
 
-  Object encode() {
-    return <Object?>[
-      sku,
-      name,
-      categoriesPath,
-      payload,
-      actualPrice?.encode(),
-      originalPrice?.encode(),
-      promocodes,
-    ];
-  }
+  Object encode() => <Object?>[
+        sku,
+        name,
+        categoriesPath,
+        payload,
+        actualPrice?.encode(),
+        originalPrice?.encode(),
+        promocodes,
+      ];
 
   static ECommerceProductPigeon decode(Object result) {
     result as List<Object?>;
@@ -537,18 +523,17 @@ class ECommercePricePigeon {
 
   List<ECommerceAmountPigeon?>? internalComponents;
 
-  Object encode() {
-    return <Object?>[
-      fiat.encode(),
-      internalComponents,
-    ];
-  }
+  Object encode() => <Object?>[
+        fiat.encode(),
+        internalComponents,
+      ];
 
   static ECommercePricePigeon decode(Object result) {
     result as List<Object?>;
     return ECommercePricePigeon(
       fiat: ECommerceAmountPigeon.decode(result[0]! as List<Object?>),
-      internalComponents: (result[1] as List<Object?>?)?.cast<ECommerceAmountPigeon?>(),
+      internalComponents:
+          (result[1] as List<Object?>?)?.cast<ECommerceAmountPigeon?>(),
     );
   }
 }
@@ -566,13 +551,11 @@ class ECommerceReferrerPigeon {
 
   ECommerceScreenPigeon? screen;
 
-  Object encode() {
-    return <Object?>[
-      type,
-      identifier,
-      screen?.encode(),
-    ];
-  }
+  Object encode() => <Object?>[
+        type,
+        identifier,
+        screen?.encode(),
+      ];
 
   static ECommerceReferrerPigeon decode(Object result) {
     result as List<Object?>;
@@ -602,14 +585,12 @@ class ECommerceScreenPigeon {
 
   Map<String?, String?>? payload;
 
-  Object encode() {
-    return <Object?>[
-      name,
-      categoriesPath,
-      searchQuery,
-      payload,
-    ];
-  }
+  Object encode() => <Object?>[
+        name,
+        categoriesPath,
+        searchQuery,
+        payload,
+      ];
 
   static ECommerceScreenPigeon decode(Object result) {
     result as List<Object?>;
@@ -638,14 +619,12 @@ class ECommerceCartItemPigeon {
 
   ECommerceReferrerPigeon? referrer;
 
-  Object encode() {
-    return <Object?>[
-      product.encode(),
-      quantity,
-      revenue.encode(),
-      referrer?.encode(),
-    ];
-  }
+  Object encode() => <Object?>[
+        product.encode(),
+        quantity,
+        revenue.encode(),
+        referrer?.encode(),
+      ];
 
   static ECommerceCartItemPigeon decode(Object result) {
     result as List<Object?>;
@@ -673,13 +652,11 @@ class ECommerceOrderPigeon {
 
   Map<String?, String?>? payload;
 
-  Object encode() {
-    return <Object?>[
-      identifier,
-      items,
-      payload,
-    ];
-  }
+  Object encode() => <Object?>[
+        identifier,
+        items,
+        payload,
+      ];
 
   static ECommerceOrderPigeon decode(Object result) {
     result as List<Object?>;
@@ -713,16 +690,14 @@ class ECommerceEventPigeon {
 
   ECommerceScreenPigeon? screen;
 
-  Object encode() {
-    return <Object?>[
-      eventType,
-      cartItem?.encode(),
-      order?.encode(),
-      product?.encode(),
-      referrer?.encode(),
-      screen?.encode(),
-    ];
-  }
+  Object encode() => <Object?>[
+        eventType,
+        cartItem?.encode(),
+        order?.encode(),
+        product?.encode(),
+        referrer?.encode(),
+        screen?.encode(),
+      ];
 
   static ECommerceEventPigeon decode(Object result) {
     result as List<Object?>;
@@ -766,15 +741,13 @@ class StackTraceElementPigeon {
 
   String methodName;
 
-  Object encode() {
-    return <Object?>[
-      className,
-      fileName,
-      line,
-      column,
-      methodName,
-    ];
-  }
+  Object encode() => <Object?>[
+        className,
+        fileName,
+        line,
+        column,
+        methodName,
+      ];
 
   static StackTraceElementPigeon decode(Object result) {
     result as List<Object?>;
@@ -804,14 +777,12 @@ class ErrorDetailsPigeon {
 
   List<StackTraceElementPigeon?>? backtrace;
 
-  Object encode() {
-    return <Object?>[
-      exceptionClass,
-      message,
-      dartVersion,
-      backtrace,
-    ];
-  }
+  Object encode() => <Object?>[
+        exceptionClass,
+        message,
+        dartVersion,
+        backtrace,
+      ];
 
   static ErrorDetailsPigeon decode(Object result) {
     result as List<Object?>;
@@ -819,7 +790,8 @@ class ErrorDetailsPigeon {
       exceptionClass: result[0]! as String,
       message: result[1] as String?,
       dartVersion: result[2]! as String,
-      backtrace: (result[3] as List<Object?>?)?.cast<StackTraceElementPigeon?>(),
+      backtrace:
+          (result[3] as List<Object?>?)?.cast<StackTraceElementPigeon?>(),
     );
   }
 }
@@ -864,22 +836,20 @@ class UserProfileAttributePigeon {
 
   UserProfileAttributeType? type;
 
-  Object encode() {
-    return <Object?>[
-      key,
-      doubleValue,
-      stringValue,
-      boolValue,
-      year,
-      month,
-      day,
-      age,
-      genderValue?.index,
-      ifUndefined,
-      reset,
-      type?.index,
-    ];
-  }
+  Object encode() => <Object?>[
+        key,
+        doubleValue,
+        stringValue,
+        boolValue,
+        year,
+        month,
+        day,
+        age,
+        genderValue?.index,
+        ifUndefined,
+        reset,
+        type?.index,
+      ];
 
   static UserProfileAttributePigeon decode(Object result) {
     result as List<Object?>;
@@ -892,9 +862,8 @@ class UserProfileAttributePigeon {
       month: result[5] as int?,
       day: result[6] as int?,
       age: result[7] as int?,
-      genderValue: result[8] != null
-          ? GenderPigeon.values[result[8]! as int]
-          : null,
+      genderValue:
+          result[8] != null ? GenderPigeon.values[result[8]! as int] : null,
       ifUndefined: result[9] as bool?,
       reset: result[10] as bool?,
       type: result[11] != null
@@ -911,16 +880,15 @@ class UserProfilePigeon {
 
   List<UserProfileAttributePigeon?> attributes;
 
-  Object encode() {
-    return <Object?>[
-      attributes,
-    ];
-  }
+  Object encode() => <Object?>[
+        attributes,
+      ];
 
   static UserProfilePigeon decode(Object result) {
     result as List<Object?>;
     return UserProfilePigeon(
-      attributes: (result[0] as List<Object?>?)!.cast<UserProfileAttributePigeon?>(),
+      attributes:
+          (result[0] as List<Object?>?)!.cast<UserProfileAttributePigeon?>(),
     );
   }
 }
@@ -959,29 +927,25 @@ class AdRevenuePigeon {
 
   Map<String?, String?>? payload;
 
-  Object encode() {
-    return <Object?>[
-      adRevenue,
-      currency,
-      adType?.index,
-      adNetwork,
-      adUnitId,
-      adUnitName,
-      adPlacementId,
-      adPlacementName,
-      precision,
-      payload,
-    ];
-  }
+  Object encode() => <Object?>[
+        adRevenue,
+        currency,
+        adType?.index,
+        adNetwork,
+        adUnitId,
+        adUnitName,
+        adPlacementId,
+        adPlacementName,
+        precision,
+        payload,
+      ];
 
   static AdRevenuePigeon decode(Object result) {
     result as List<Object?>;
     return AdRevenuePigeon(
       adRevenue: result[0]! as String,
       currency: result[1]! as String,
-      adType: result[2] != null
-          ? AdTypePigeon.values[result[2]! as int]
-          : null,
+      adType: result[2] != null ? AdTypePigeon.values[result[2]! as int] : null,
       adNetwork: result[3] as String?,
       adUnitId: result[4] as String?,
       adUnitName: result[5] as String?,
@@ -1006,13 +970,11 @@ class StartupParamsItemPigeon {
 
   String? errorDetails;
 
-  Object encode() {
-    return <Object?>[
-      id,
-      status.index,
-      errorDetails,
-    ];
-  }
+  Object encode() => <Object?>[
+        id,
+        status.index,
+        errorDetails,
+      ];
 
   static StartupParamsItemPigeon decode(Object result) {
     result as List<Object?>;
@@ -1040,21 +1002,20 @@ class StartupParamsResultPigeon {
 
   String? uuid;
 
-  Object encode() {
-    return <Object?>[
-      deviceId,
-      deviceIdHash,
-      parameters,
-      uuid,
-    ];
-  }
+  Object encode() => <Object?>[
+        deviceId,
+        deviceIdHash,
+        parameters,
+        uuid,
+      ];
 
   static StartupParamsResultPigeon decode(Object result) {
     result as List<Object?>;
     return StartupParamsResultPigeon(
       deviceId: result[0] as String?,
       deviceIdHash: result[1] as String?,
-      parameters: (result[2] as Map<Object?, Object?>?)?.cast<String?, StartupParamsItemPigeon?>(),
+      parameters: (result[2] as Map<Object?, Object?>?)
+          ?.cast<String?, StartupParamsItemPigeon?>(),
       uuid: result[3] as String?,
     );
   }
@@ -1067,11 +1028,9 @@ class StartupParamsReasonPigeon {
 
   String value;
 
-  Object encode() {
-    return <Object?>[
-      value,
-    ];
-  }
+  Object encode() => <Object?>[
+        value,
+      ];
 
   static StartupParamsReasonPigeon decode(Object result) {
     result as List<Object?>;
@@ -1091,12 +1050,10 @@ class StartupParamsPigeon {
 
   StartupParamsReasonPigeon? reason;
 
-  Object encode() {
-    return <Object?>[
-      result?.encode(),
-      reason?.encode(),
-    ];
-  }
+  Object encode() => <Object?>[
+        result?.encode(),
+        reason?.encode(),
+      ];
 
   static StartupParamsPigeon decode(Object result) {
     result as List<Object?>;
@@ -1142,25 +1099,24 @@ class ReporterConfigPigeon {
 
   String? userProfileID;
 
-  Object encode() {
-    return <Object?>[
-      apiKey,
-      appEnvironment,
-      dataSendingEnabled,
-      dispatchPeriodSeconds,
-      logs,
-      maxReportsCount,
-      maxReportsInDatabaseCount,
-      sessionTimeout,
-      userProfileID,
-    ];
-  }
+  Object encode() => <Object?>[
+        apiKey,
+        appEnvironment,
+        dataSendingEnabled,
+        dispatchPeriodSeconds,
+        logs,
+        maxReportsCount,
+        maxReportsInDatabaseCount,
+        sessionTimeout,
+        userProfileID,
+      ];
 
   static ReporterConfigPigeon decode(Object result) {
     result as List<Object?>;
     return ReporterConfigPigeon(
       apiKey: result[0]! as String,
-      appEnvironment: (result[1] as Map<Object?, Object?>?)?.cast<String?, String?>(),
+      appEnvironment:
+          (result[1] as Map<Object?, Object?>?)?.cast<String?, String?>(),
       dataSendingEnabled: result[2] as bool?,
       dispatchPeriodSeconds: result[3] as int?,
       logs: result[4] as bool?,
@@ -1174,6 +1130,7 @@ class ReporterConfigPigeon {
 
 class _AppMetricaConfigConverterPigeonCodec extends StandardMessageCodec {
   const _AppMetricaConfigConverterPigeonCodec();
+
   @override
   void writeValue(WriteBuffer buffer, Object? value) {
     if (value is AppMetricaConfigPigeon) {
@@ -1193,11 +1150,11 @@ class _AppMetricaConfigConverterPigeonCodec extends StandardMessageCodec {
   @override
   Object? readValueOfType(int type, ReadBuffer buffer) {
     switch (type) {
-      case 128: 
+      case 128:
         return AppMetricaConfigPigeon.decode(readValue(buffer)!);
-      case 129: 
+      case 129:
         return LocationPigeon.decode(readValue(buffer)!);
-      case 130: 
+      case 130:
         return PreloadInfoPigeon.decode(readValue(buffer)!);
       default:
         return super.readValueOfType(type, buffer);
@@ -1213,18 +1170,21 @@ class AppMetricaConfigConverterPigeon {
       : _binaryMessenger = binaryMessenger;
   final BinaryMessenger? _binaryMessenger;
 
-  static const MessageCodec<Object?> codec = _AppMetricaConfigConverterPigeonCodec();
+  static const MessageCodec<Object?> codec =
+      _AppMetricaConfigConverterPigeonCodec();
 
   Future<String> toJson(AppMetricaConfigPigeon arg_config) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'dev.flutter.pigeon.appmetrica_plugin.AppMetricaConfigConverterPigeon.toJson', codec,
-        binaryMessenger: _binaryMessenger);
+      "dev.flutter.pigeon.appmetrica_plugin.AppMetricaConfigConverterPigeon.toJson",
+      codec,
+      binaryMessenger: _binaryMessenger,
+    );
     final List<Object?>? replyList =
         await channel.send(<Object?>[arg_config]) as List<Object?>?;
     if (replyList == null) {
       throw PlatformException(
-        code: 'channel-error',
-        message: 'Unable to establish connection on channel.',
+        code: "channel-error",
+        message: "Unable to establish connection on channel.",
       );
     } else if (replyList.length > 1) {
       throw PlatformException(
@@ -1234,8 +1194,8 @@ class AppMetricaConfigConverterPigeon {
       );
     } else if (replyList[0] == null) {
       throw PlatformException(
-        code: 'null-error',
-        message: 'Host platform returned null value for non-null return value.',
+        code: "null-error",
+        message: "Host platform returned null value for non-null return value.",
       );
     } else {
       return (replyList[0] as String?)!;
@@ -1245,6 +1205,7 @@ class AppMetricaConfigConverterPigeon {
 
 class _AppMetricaPigeonCodec extends StandardMessageCodec {
   const _AppMetricaPigeonCodec();
+
   @override
   void writeValue(WriteBuffer buffer, Object? value) {
     if (value is AdRevenuePigeon) {
@@ -1345,65 +1306,66 @@ class _AppMetricaPigeonCodec extends StandardMessageCodec {
   @override
   Object? readValueOfType(int type, ReadBuffer buffer) {
     switch (type) {
-      case 128: 
+      case 128:
         return AdRevenuePigeon.decode(readValue(buffer)!);
-      case 129: 
+      case 129:
         return AppMetricaConfigPigeon.decode(readValue(buffer)!);
-      case 130: 
+      case 130:
         return AppMetricaDeferredDeeplinkErrorPigeon.decode(readValue(buffer)!);
-      case 131: 
-        return AppMetricaDeferredDeeplinkParametersPigeon.decode(readValue(buffer)!);
-      case 132: 
+      case 131:
+        return AppMetricaDeferredDeeplinkParametersPigeon.decode(
+            readValue(buffer)!);
+      case 132:
         return AppMetricaDeferredDeeplinkPigeon.decode(readValue(buffer)!);
-      case 133: 
+      case 133:
         return ECommerceAmountPigeon.decode(readValue(buffer)!);
-      case 134: 
+      case 134:
         return ECommerceAmountPigeon.decode(readValue(buffer)!);
-      case 135: 
+      case 135:
         return ECommerceCartItemPigeon.decode(readValue(buffer)!);
-      case 136: 
+      case 136:
         return ECommerceEventPigeon.decode(readValue(buffer)!);
-      case 137: 
+      case 137:
         return ECommerceOrderPigeon.decode(readValue(buffer)!);
-      case 138: 
+      case 138:
         return ECommercePricePigeon.decode(readValue(buffer)!);
-      case 139: 
+      case 139:
         return ECommercePricePigeon.decode(readValue(buffer)!);
-      case 140: 
+      case 140:
         return ECommerceProductPigeon.decode(readValue(buffer)!);
-      case 141: 
+      case 141:
         return ECommerceProductPigeon.decode(readValue(buffer)!);
-      case 142: 
+      case 142:
         return ECommerceReferrerPigeon.decode(readValue(buffer)!);
-      case 143: 
+      case 143:
         return ECommerceScreenPigeon.decode(readValue(buffer)!);
-      case 144: 
+      case 144:
         return ErrorDetailsPigeon.decode(readValue(buffer)!);
-      case 145: 
+      case 145:
         return ErrorDetailsPigeon.decode(readValue(buffer)!);
-      case 146: 
+      case 146:
         return LocationPigeon.decode(readValue(buffer)!);
-      case 147: 
+      case 147:
         return PreloadInfoPigeon.decode(readValue(buffer)!);
-      case 148: 
+      case 148:
         return ReceiptPigeon.decode(readValue(buffer)!);
-      case 149: 
+      case 149:
         return ReporterConfigPigeon.decode(readValue(buffer)!);
-      case 150: 
+      case 150:
         return RevenuePigeon.decode(readValue(buffer)!);
-      case 151: 
+      case 151:
         return StackTraceElementPigeon.decode(readValue(buffer)!);
-      case 152: 
+      case 152:
         return StartupParamsItemPigeon.decode(readValue(buffer)!);
-      case 153: 
+      case 153:
         return StartupParamsPigeon.decode(readValue(buffer)!);
-      case 154: 
+      case 154:
         return StartupParamsReasonPigeon.decode(readValue(buffer)!);
-      case 155: 
+      case 155:
         return StartupParamsResultPigeon.decode(readValue(buffer)!);
-      case 156: 
+      case 156:
         return UserProfileAttributePigeon.decode(readValue(buffer)!);
-      case 157: 
+      case 157:
         return UserProfilePigeon.decode(readValue(buffer)!);
       default:
         return super.readValueOfType(type, buffer);
@@ -1423,14 +1385,16 @@ class AppMetricaPigeon {
 
   Future<void> activate(AppMetricaConfigPigeon arg_config) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'dev.flutter.pigeon.appmetrica_plugin.AppMetricaPigeon.activate', codec,
-        binaryMessenger: _binaryMessenger);
+      "dev.flutter.pigeon.appmetrica_plugin.AppMetricaPigeon.activate",
+      codec,
+      binaryMessenger: _binaryMessenger,
+    );
     final List<Object?>? replyList =
         await channel.send(<Object?>[arg_config]) as List<Object?>?;
     if (replyList == null) {
       throw PlatformException(
-        code: 'channel-error',
-        message: 'Unable to establish connection on channel.',
+        code: "channel-error",
+        message: "Unable to establish connection on channel.",
       );
     } else if (replyList.length > 1) {
       throw PlatformException(
@@ -1445,14 +1409,16 @@ class AppMetricaPigeon {
 
   Future<void> activateReporter(ReporterConfigPigeon arg_config) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'dev.flutter.pigeon.appmetrica_plugin.AppMetricaPigeon.activateReporter', codec,
-        binaryMessenger: _binaryMessenger);
+      "dev.flutter.pigeon.appmetrica_plugin.AppMetricaPigeon.activateReporter",
+      codec,
+      binaryMessenger: _binaryMessenger,
+    );
     final List<Object?>? replyList =
         await channel.send(<Object?>[arg_config]) as List<Object?>?;
     if (replyList == null) {
       throw PlatformException(
-        code: 'channel-error',
-        message: 'Unable to establish connection on channel.',
+        code: "channel-error",
+        message: "Unable to establish connection on channel.",
       );
     } else if (replyList.length > 1) {
       throw PlatformException(
@@ -1467,14 +1433,15 @@ class AppMetricaPigeon {
 
   Future<void> clearAppEnvironment() async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'dev.flutter.pigeon.appmetrica_plugin.AppMetricaPigeon.clearAppEnvironment', codec,
-        binaryMessenger: _binaryMessenger);
-    final List<Object?>? replyList =
-        await channel.send(null) as List<Object?>?;
+      "dev.flutter.pigeon.appmetrica_plugin.AppMetricaPigeon.clearAppEnvironment",
+      codec,
+      binaryMessenger: _binaryMessenger,
+    );
+    final List<Object?>? replyList = await channel.send(null) as List<Object?>?;
     if (replyList == null) {
       throw PlatformException(
-        code: 'channel-error',
-        message: 'Unable to establish connection on channel.',
+        code: "channel-error",
+        message: "Unable to establish connection on channel.",
       );
     } else if (replyList.length > 1) {
       throw PlatformException(
@@ -1489,14 +1456,15 @@ class AppMetricaPigeon {
 
   Future<void> enableActivityAutoTracking() async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'dev.flutter.pigeon.appmetrica_plugin.AppMetricaPigeon.enableActivityAutoTracking', codec,
-        binaryMessenger: _binaryMessenger);
-    final List<Object?>? replyList =
-        await channel.send(null) as List<Object?>?;
+      "dev.flutter.pigeon.appmetrica_plugin.AppMetricaPigeon.enableActivityAutoTracking",
+      codec,
+      binaryMessenger: _binaryMessenger,
+    );
+    final List<Object?>? replyList = await channel.send(null) as List<Object?>?;
     if (replyList == null) {
       throw PlatformException(
-        code: 'channel-error',
-        message: 'Unable to establish connection on channel.',
+        code: "channel-error",
+        message: "Unable to establish connection on channel.",
       );
     } else if (replyList.length > 1) {
       throw PlatformException(
@@ -1511,14 +1479,15 @@ class AppMetricaPigeon {
 
   Future<String?> getDeviceId() async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'dev.flutter.pigeon.appmetrica_plugin.AppMetricaPigeon.getDeviceId', codec,
-        binaryMessenger: _binaryMessenger);
-    final List<Object?>? replyList =
-        await channel.send(null) as List<Object?>?;
+      "dev.flutter.pigeon.appmetrica_plugin.AppMetricaPigeon.getDeviceId",
+      codec,
+      binaryMessenger: _binaryMessenger,
+    );
+    final List<Object?>? replyList = await channel.send(null) as List<Object?>?;
     if (replyList == null) {
       throw PlatformException(
-        code: 'channel-error',
-        message: 'Unable to establish connection on channel.',
+        code: "channel-error",
+        message: "Unable to establish connection on channel.",
       );
     } else if (replyList.length > 1) {
       throw PlatformException(
@@ -1533,14 +1502,15 @@ class AppMetricaPigeon {
 
   Future<int> getLibraryApiLevel() async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'dev.flutter.pigeon.appmetrica_plugin.AppMetricaPigeon.getLibraryApiLevel', codec,
-        binaryMessenger: _binaryMessenger);
-    final List<Object?>? replyList =
-        await channel.send(null) as List<Object?>?;
+      "dev.flutter.pigeon.appmetrica_plugin.AppMetricaPigeon.getLibraryApiLevel",
+      codec,
+      binaryMessenger: _binaryMessenger,
+    );
+    final List<Object?>? replyList = await channel.send(null) as List<Object?>?;
     if (replyList == null) {
       throw PlatformException(
-        code: 'channel-error',
-        message: 'Unable to establish connection on channel.',
+        code: "channel-error",
+        message: "Unable to establish connection on channel.",
       );
     } else if (replyList.length > 1) {
       throw PlatformException(
@@ -1550,8 +1520,8 @@ class AppMetricaPigeon {
       );
     } else if (replyList[0] == null) {
       throw PlatformException(
-        code: 'null-error',
-        message: 'Host platform returned null value for non-null return value.',
+        code: "null-error",
+        message: "Host platform returned null value for non-null return value.",
       );
     } else {
       return (replyList[0] as int?)!;
@@ -1560,14 +1530,15 @@ class AppMetricaPigeon {
 
   Future<String> getLibraryVersion() async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'dev.flutter.pigeon.appmetrica_plugin.AppMetricaPigeon.getLibraryVersion', codec,
-        binaryMessenger: _binaryMessenger);
-    final List<Object?>? replyList =
-        await channel.send(null) as List<Object?>?;
+      "dev.flutter.pigeon.appmetrica_plugin.AppMetricaPigeon.getLibraryVersion",
+      codec,
+      binaryMessenger: _binaryMessenger,
+    );
+    final List<Object?>? replyList = await channel.send(null) as List<Object?>?;
     if (replyList == null) {
       throw PlatformException(
-        code: 'channel-error',
-        message: 'Unable to establish connection on channel.',
+        code: "channel-error",
+        message: "Unable to establish connection on channel.",
       );
     } else if (replyList.length > 1) {
       throw PlatformException(
@@ -1577,8 +1548,8 @@ class AppMetricaPigeon {
       );
     } else if (replyList[0] == null) {
       throw PlatformException(
-        code: 'null-error',
-        message: 'Host platform returned null value for non-null return value.',
+        code: "null-error",
+        message: "Host platform returned null value for non-null return value.",
       );
     } else {
       return (replyList[0] as String?)!;
@@ -1587,14 +1558,15 @@ class AppMetricaPigeon {
 
   Future<String?> getUuid() async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'dev.flutter.pigeon.appmetrica_plugin.AppMetricaPigeon.getUuid', codec,
-        binaryMessenger: _binaryMessenger);
-    final List<Object?>? replyList =
-        await channel.send(null) as List<Object?>?;
+      "dev.flutter.pigeon.appmetrica_plugin.AppMetricaPigeon.getUuid",
+      codec,
+      binaryMessenger: _binaryMessenger,
+    );
+    final List<Object?>? replyList = await channel.send(null) as List<Object?>?;
     if (replyList == null) {
       throw PlatformException(
-        code: 'channel-error',
-        message: 'Unable to establish connection on channel.',
+        code: "channel-error",
+        message: "Unable to establish connection on channel.",
       );
     } else if (replyList.length > 1) {
       throw PlatformException(
@@ -1609,14 +1581,15 @@ class AppMetricaPigeon {
 
   Future<void> pauseSession() async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'dev.flutter.pigeon.appmetrica_plugin.AppMetricaPigeon.pauseSession', codec,
-        binaryMessenger: _binaryMessenger);
-    final List<Object?>? replyList =
-        await channel.send(null) as List<Object?>?;
+      "dev.flutter.pigeon.appmetrica_plugin.AppMetricaPigeon.pauseSession",
+      codec,
+      binaryMessenger: _binaryMessenger,
+    );
+    final List<Object?>? replyList = await channel.send(null) as List<Object?>?;
     if (replyList == null) {
       throw PlatformException(
-        code: 'channel-error',
-        message: 'Unable to establish connection on channel.',
+        code: "channel-error",
+        message: "Unable to establish connection on channel.",
       );
     } else if (replyList.length > 1) {
       throw PlatformException(
@@ -1631,14 +1604,16 @@ class AppMetricaPigeon {
 
   Future<void> putAppEnvironmentValue(String arg_key, String? arg_value) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'dev.flutter.pigeon.appmetrica_plugin.AppMetricaPigeon.putAppEnvironmentValue', codec,
-        binaryMessenger: _binaryMessenger);
+      "dev.flutter.pigeon.appmetrica_plugin.AppMetricaPigeon.putAppEnvironmentValue",
+      codec,
+      binaryMessenger: _binaryMessenger,
+    );
     final List<Object?>? replyList =
         await channel.send(<Object?>[arg_key, arg_value]) as List<Object?>?;
     if (replyList == null) {
       throw PlatformException(
-        code: 'channel-error',
-        message: 'Unable to establish connection on channel.',
+        code: "channel-error",
+        message: "Unable to establish connection on channel.",
       );
     } else if (replyList.length > 1) {
       throw PlatformException(
@@ -1651,16 +1626,19 @@ class AppMetricaPigeon {
     }
   }
 
-  Future<void> putErrorEnvironmentValue(String arg_key, String? arg_value) async {
+  Future<void> putErrorEnvironmentValue(
+      String arg_key, String? arg_value) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'dev.flutter.pigeon.appmetrica_plugin.AppMetricaPigeon.putErrorEnvironmentValue', codec,
-        binaryMessenger: _binaryMessenger);
+      "dev.flutter.pigeon.appmetrica_plugin.AppMetricaPigeon.putErrorEnvironmentValue",
+      codec,
+      binaryMessenger: _binaryMessenger,
+    );
     final List<Object?>? replyList =
         await channel.send(<Object?>[arg_key, arg_value]) as List<Object?>?;
     if (replyList == null) {
       throw PlatformException(
-        code: 'channel-error',
-        message: 'Unable to establish connection on channel.',
+        code: "channel-error",
+        message: "Unable to establish connection on channel.",
       );
     } else if (replyList.length > 1) {
       throw PlatformException(
@@ -1675,14 +1653,16 @@ class AppMetricaPigeon {
 
   Future<void> reportAdRevenue(AdRevenuePigeon arg_adRevenue) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'dev.flutter.pigeon.appmetrica_plugin.AppMetricaPigeon.reportAdRevenue', codec,
-        binaryMessenger: _binaryMessenger);
+      "dev.flutter.pigeon.appmetrica_plugin.AppMetricaPigeon.reportAdRevenue",
+      codec,
+      binaryMessenger: _binaryMessenger,
+    );
     final List<Object?>? replyList =
         await channel.send(<Object?>[arg_adRevenue]) as List<Object?>?;
     if (replyList == null) {
       throw PlatformException(
-        code: 'channel-error',
-        message: 'Unable to establish connection on channel.',
+        code: "channel-error",
+        message: "Unable to establish connection on channel.",
       );
     } else if (replyList.length > 1) {
       throw PlatformException(
@@ -1697,14 +1677,16 @@ class AppMetricaPigeon {
 
   Future<void> reportAppOpen(String arg_deeplink) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'dev.flutter.pigeon.appmetrica_plugin.AppMetricaPigeon.reportAppOpen', codec,
-        binaryMessenger: _binaryMessenger);
+      "dev.flutter.pigeon.appmetrica_plugin.AppMetricaPigeon.reportAppOpen",
+      codec,
+      binaryMessenger: _binaryMessenger,
+    );
     final List<Object?>? replyList =
         await channel.send(<Object?>[arg_deeplink]) as List<Object?>?;
     if (replyList == null) {
       throw PlatformException(
-        code: 'channel-error',
-        message: 'Unable to establish connection on channel.',
+        code: "channel-error",
+        message: "Unable to establish connection on channel.",
       );
     } else if (replyList.length > 1) {
       throw PlatformException(
@@ -1719,14 +1701,16 @@ class AppMetricaPigeon {
 
   Future<void> reportECommerce(ECommerceEventPigeon arg_event) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'dev.flutter.pigeon.appmetrica_plugin.AppMetricaPigeon.reportECommerce', codec,
-        binaryMessenger: _binaryMessenger);
+      "dev.flutter.pigeon.appmetrica_plugin.AppMetricaPigeon.reportECommerce",
+      codec,
+      binaryMessenger: _binaryMessenger,
+    );
     final List<Object?>? replyList =
         await channel.send(<Object?>[arg_event]) as List<Object?>?;
     if (replyList == null) {
       throw PlatformException(
-        code: 'channel-error',
-        message: 'Unable to establish connection on channel.',
+        code: "channel-error",
+        message: "Unable to establish connection on channel.",
       );
     } else if (replyList.length > 1) {
       throw PlatformException(
@@ -1739,16 +1723,19 @@ class AppMetricaPigeon {
     }
   }
 
-  Future<void> reportError(ErrorDetailsPigeon arg_error, String? arg_message) async {
+  Future<void> reportError(
+      ErrorDetailsPigeon arg_error, String? arg_message) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'dev.flutter.pigeon.appmetrica_plugin.AppMetricaPigeon.reportError', codec,
-        binaryMessenger: _binaryMessenger);
+      "dev.flutter.pigeon.appmetrica_plugin.AppMetricaPigeon.reportError",
+      codec,
+      binaryMessenger: _binaryMessenger,
+    );
     final List<Object?>? replyList =
         await channel.send(<Object?>[arg_error, arg_message]) as List<Object?>?;
     if (replyList == null) {
       throw PlatformException(
-        code: 'channel-error',
-        message: 'Unable to establish connection on channel.',
+        code: "channel-error",
+        message: "Unable to establish connection on channel.",
       );
     } else if (replyList.length > 1) {
       throw PlatformException(
@@ -1761,16 +1748,19 @@ class AppMetricaPigeon {
     }
   }
 
-  Future<void> reportErrorWithGroup(String arg_groupId, ErrorDetailsPigeon? arg_error, String? arg_message) async {
+  Future<void> reportErrorWithGroup(String arg_groupId,
+      ErrorDetailsPigeon? arg_error, String? arg_message) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'dev.flutter.pigeon.appmetrica_plugin.AppMetricaPigeon.reportErrorWithGroup', codec,
-        binaryMessenger: _binaryMessenger);
-    final List<Object?>? replyList =
-        await channel.send(<Object?>[arg_groupId, arg_error, arg_message]) as List<Object?>?;
+      "dev.flutter.pigeon.appmetrica_plugin.AppMetricaPigeon.reportErrorWithGroup",
+      codec,
+      binaryMessenger: _binaryMessenger,
+    );
+    final List<Object?>? replyList = await channel
+        .send(<Object?>[arg_groupId, arg_error, arg_message]) as List<Object?>?;
     if (replyList == null) {
       throw PlatformException(
-        code: 'channel-error',
-        message: 'Unable to establish connection on channel.',
+        code: "channel-error",
+        message: "Unable to establish connection on channel.",
       );
     } else if (replyList.length > 1) {
       throw PlatformException(
@@ -1785,14 +1775,16 @@ class AppMetricaPigeon {
 
   Future<void> reportEvent(String arg_eventName) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'dev.flutter.pigeon.appmetrica_plugin.AppMetricaPigeon.reportEvent', codec,
-        binaryMessenger: _binaryMessenger);
+      "dev.flutter.pigeon.appmetrica_plugin.AppMetricaPigeon.reportEvent",
+      codec,
+      binaryMessenger: _binaryMessenger,
+    );
     final List<Object?>? replyList =
         await channel.send(<Object?>[arg_eventName]) as List<Object?>?;
     if (replyList == null) {
       throw PlatformException(
-        code: 'channel-error',
-        message: 'Unable to establish connection on channel.',
+        code: "channel-error",
+        message: "Unable to establish connection on channel.",
       );
     } else if (replyList.length > 1) {
       throw PlatformException(
@@ -1805,16 +1797,19 @@ class AppMetricaPigeon {
     }
   }
 
-  Future<void> reportEventWithJson(String arg_eventName, String? arg_attributesJson) async {
+  Future<void> reportEventWithJson(
+      String arg_eventName, String? arg_attributesJson) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'dev.flutter.pigeon.appmetrica_plugin.AppMetricaPigeon.reportEventWithJson', codec,
-        binaryMessenger: _binaryMessenger);
-    final List<Object?>? replyList =
-        await channel.send(<Object?>[arg_eventName, arg_attributesJson]) as List<Object?>?;
+      "dev.flutter.pigeon.appmetrica_plugin.AppMetricaPigeon.reportEventWithJson",
+      codec,
+      binaryMessenger: _binaryMessenger,
+    );
+    final List<Object?>? replyList = await channel
+        .send(<Object?>[arg_eventName, arg_attributesJson]) as List<Object?>?;
     if (replyList == null) {
       throw PlatformException(
-        code: 'channel-error',
-        message: 'Unable to establish connection on channel.',
+        code: "channel-error",
+        message: "Unable to establish connection on channel.",
       );
     } else if (replyList.length > 1) {
       throw PlatformException(
@@ -1829,14 +1824,16 @@ class AppMetricaPigeon {
 
   Future<void> reportReferralUrl(String arg_referralUrl) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'dev.flutter.pigeon.appmetrica_plugin.AppMetricaPigeon.reportReferralUrl', codec,
-        binaryMessenger: _binaryMessenger);
+      "dev.flutter.pigeon.appmetrica_plugin.AppMetricaPigeon.reportReferralUrl",
+      codec,
+      binaryMessenger: _binaryMessenger,
+    );
     final List<Object?>? replyList =
         await channel.send(<Object?>[arg_referralUrl]) as List<Object?>?;
     if (replyList == null) {
       throw PlatformException(
-        code: 'channel-error',
-        message: 'Unable to establish connection on channel.',
+        code: "channel-error",
+        message: "Unable to establish connection on channel.",
       );
     } else if (replyList.length > 1) {
       throw PlatformException(
@@ -1851,14 +1848,16 @@ class AppMetricaPigeon {
 
   Future<void> reportRevenue(RevenuePigeon arg_revenue) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'dev.flutter.pigeon.appmetrica_plugin.AppMetricaPigeon.reportRevenue', codec,
-        binaryMessenger: _binaryMessenger);
+      "dev.flutter.pigeon.appmetrica_plugin.AppMetricaPigeon.reportRevenue",
+      codec,
+      binaryMessenger: _binaryMessenger,
+    );
     final List<Object?>? replyList =
         await channel.send(<Object?>[arg_revenue]) as List<Object?>?;
     if (replyList == null) {
       throw PlatformException(
-        code: 'channel-error',
-        message: 'Unable to establish connection on channel.',
+        code: "channel-error",
+        message: "Unable to establish connection on channel.",
       );
     } else if (replyList.length > 1) {
       throw PlatformException(
@@ -1873,14 +1872,16 @@ class AppMetricaPigeon {
 
   Future<void> reportUnhandledException(ErrorDetailsPigeon arg_error) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'dev.flutter.pigeon.appmetrica_plugin.AppMetricaPigeon.reportUnhandledException', codec,
-        binaryMessenger: _binaryMessenger);
+      "dev.flutter.pigeon.appmetrica_plugin.AppMetricaPigeon.reportUnhandledException",
+      codec,
+      binaryMessenger: _binaryMessenger,
+    );
     final List<Object?>? replyList =
         await channel.send(<Object?>[arg_error]) as List<Object?>?;
     if (replyList == null) {
       throw PlatformException(
-        code: 'channel-error',
-        message: 'Unable to establish connection on channel.',
+        code: "channel-error",
+        message: "Unable to establish connection on channel.",
       );
     } else if (replyList.length > 1) {
       throw PlatformException(
@@ -1895,14 +1896,16 @@ class AppMetricaPigeon {
 
   Future<void> reportUserProfile(UserProfilePigeon arg_userProfile) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'dev.flutter.pigeon.appmetrica_plugin.AppMetricaPigeon.reportUserProfile', codec,
-        binaryMessenger: _binaryMessenger);
+      "dev.flutter.pigeon.appmetrica_plugin.AppMetricaPigeon.reportUserProfile",
+      codec,
+      binaryMessenger: _binaryMessenger,
+    );
     final List<Object?>? replyList =
         await channel.send(<Object?>[arg_userProfile]) as List<Object?>?;
     if (replyList == null) {
       throw PlatformException(
-        code: 'channel-error',
-        message: 'Unable to establish connection on channel.',
+        code: "channel-error",
+        message: "Unable to establish connection on channel.",
       );
     } else if (replyList.length > 1) {
       throw PlatformException(
@@ -1917,14 +1920,15 @@ class AppMetricaPigeon {
 
   Future<AppMetricaDeferredDeeplinkPigeon> requestDeferredDeeplink() async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'dev.flutter.pigeon.appmetrica_plugin.AppMetricaPigeon.requestDeferredDeeplink', codec,
-        binaryMessenger: _binaryMessenger);
-    final List<Object?>? replyList =
-        await channel.send(null) as List<Object?>?;
+      "dev.flutter.pigeon.appmetrica_plugin.AppMetricaPigeon.requestDeferredDeeplink",
+      codec,
+      binaryMessenger: _binaryMessenger,
+    );
+    final List<Object?>? replyList = await channel.send(null) as List<Object?>?;
     if (replyList == null) {
       throw PlatformException(
-        code: 'channel-error',
-        message: 'Unable to establish connection on channel.',
+        code: "channel-error",
+        message: "Unable to establish connection on channel.",
       );
     } else if (replyList.length > 1) {
       throw PlatformException(
@@ -1934,24 +1938,26 @@ class AppMetricaPigeon {
       );
     } else if (replyList[0] == null) {
       throw PlatformException(
-        code: 'null-error',
-        message: 'Host platform returned null value for non-null return value.',
+        code: "null-error",
+        message: "Host platform returned null value for non-null return value.",
       );
     } else {
       return (replyList[0] as AppMetricaDeferredDeeplinkPigeon?)!;
     }
   }
 
-  Future<AppMetricaDeferredDeeplinkParametersPigeon> requestDeferredDeeplinkParameters() async {
+  Future<AppMetricaDeferredDeeplinkParametersPigeon>
+      requestDeferredDeeplinkParameters() async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'dev.flutter.pigeon.appmetrica_plugin.AppMetricaPigeon.requestDeferredDeeplinkParameters', codec,
-        binaryMessenger: _binaryMessenger);
-    final List<Object?>? replyList =
-        await channel.send(null) as List<Object?>?;
+      "dev.flutter.pigeon.appmetrica_plugin.AppMetricaPigeon.requestDeferredDeeplinkParameters",
+      codec,
+      binaryMessenger: _binaryMessenger,
+    );
+    final List<Object?>? replyList = await channel.send(null) as List<Object?>?;
     if (replyList == null) {
       throw PlatformException(
-        code: 'channel-error',
-        message: 'Unable to establish connection on channel.',
+        code: "channel-error",
+        message: "Unable to establish connection on channel.",
       );
     } else if (replyList.length > 1) {
       throw PlatformException(
@@ -1961,24 +1967,27 @@ class AppMetricaPigeon {
       );
     } else if (replyList[0] == null) {
       throw PlatformException(
-        code: 'null-error',
-        message: 'Host platform returned null value for non-null return value.',
+        code: "null-error",
+        message: "Host platform returned null value for non-null return value.",
       );
     } else {
       return (replyList[0] as AppMetricaDeferredDeeplinkParametersPigeon?)!;
     }
   }
 
-  Future<StartupParamsPigeon> requestStartupParams(List<String?> arg_params) async {
+  Future<StartupParamsPigeon> requestStartupParams(
+      List<String?> arg_params) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'dev.flutter.pigeon.appmetrica_plugin.AppMetricaPigeon.requestStartupParams', codec,
-        binaryMessenger: _binaryMessenger);
+      "dev.flutter.pigeon.appmetrica_plugin.AppMetricaPigeon.requestStartupParams",
+      codec,
+      binaryMessenger: _binaryMessenger,
+    );
     final List<Object?>? replyList =
         await channel.send(<Object?>[arg_params]) as List<Object?>?;
     if (replyList == null) {
       throw PlatformException(
-        code: 'channel-error',
-        message: 'Unable to establish connection on channel.',
+        code: "channel-error",
+        message: "Unable to establish connection on channel.",
       );
     } else if (replyList.length > 1) {
       throw PlatformException(
@@ -1988,8 +1997,8 @@ class AppMetricaPigeon {
       );
     } else if (replyList[0] == null) {
       throw PlatformException(
-        code: 'null-error',
-        message: 'Host platform returned null value for non-null return value.',
+        code: "null-error",
+        message: "Host platform returned null value for non-null return value.",
       );
     } else {
       return (replyList[0] as StartupParamsPigeon?)!;
@@ -1998,14 +2007,15 @@ class AppMetricaPigeon {
 
   Future<void> resumeSession() async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'dev.flutter.pigeon.appmetrica_plugin.AppMetricaPigeon.resumeSession', codec,
-        binaryMessenger: _binaryMessenger);
-    final List<Object?>? replyList =
-        await channel.send(null) as List<Object?>?;
+      "dev.flutter.pigeon.appmetrica_plugin.AppMetricaPigeon.resumeSession",
+      codec,
+      binaryMessenger: _binaryMessenger,
+    );
+    final List<Object?>? replyList = await channel.send(null) as List<Object?>?;
     if (replyList == null) {
       throw PlatformException(
-        code: 'channel-error',
-        message: 'Unable to establish connection on channel.',
+        code: "channel-error",
+        message: "Unable to establish connection on channel.",
       );
     } else if (replyList.length > 1) {
       throw PlatformException(
@@ -2020,14 +2030,15 @@ class AppMetricaPigeon {
 
   Future<void> sendEventsBuffer() async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'dev.flutter.pigeon.appmetrica_plugin.AppMetricaPigeon.sendEventsBuffer', codec,
-        binaryMessenger: _binaryMessenger);
-    final List<Object?>? replyList =
-        await channel.send(null) as List<Object?>?;
+      "dev.flutter.pigeon.appmetrica_plugin.AppMetricaPigeon.sendEventsBuffer",
+      codec,
+      binaryMessenger: _binaryMessenger,
+    );
+    final List<Object?>? replyList = await channel.send(null) as List<Object?>?;
     if (replyList == null) {
       throw PlatformException(
-        code: 'channel-error',
-        message: 'Unable to establish connection on channel.',
+        code: "channel-error",
+        message: "Unable to establish connection on channel.",
       );
     } else if (replyList.length > 1) {
       throw PlatformException(
@@ -2042,14 +2053,16 @@ class AppMetricaPigeon {
 
   Future<void> setDataSendingEnabled(bool arg_enabled) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'dev.flutter.pigeon.appmetrica_plugin.AppMetricaPigeon.setDataSendingEnabled', codec,
-        binaryMessenger: _binaryMessenger);
+      "dev.flutter.pigeon.appmetrica_plugin.AppMetricaPigeon.setDataSendingEnabled",
+      codec,
+      binaryMessenger: _binaryMessenger,
+    );
     final List<Object?>? replyList =
         await channel.send(<Object?>[arg_enabled]) as List<Object?>?;
     if (replyList == null) {
       throw PlatformException(
-        code: 'channel-error',
-        message: 'Unable to establish connection on channel.',
+        code: "channel-error",
+        message: "Unable to establish connection on channel.",
       );
     } else if (replyList.length > 1) {
       throw PlatformException(
@@ -2064,14 +2077,16 @@ class AppMetricaPigeon {
 
   Future<void> setLocation(LocationPigeon? arg_location) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'dev.flutter.pigeon.appmetrica_plugin.AppMetricaPigeon.setLocation', codec,
-        binaryMessenger: _binaryMessenger);
+      "dev.flutter.pigeon.appmetrica_plugin.AppMetricaPigeon.setLocation",
+      codec,
+      binaryMessenger: _binaryMessenger,
+    );
     final List<Object?>? replyList =
         await channel.send(<Object?>[arg_location]) as List<Object?>?;
     if (replyList == null) {
       throw PlatformException(
-        code: 'channel-error',
-        message: 'Unable to establish connection on channel.',
+        code: "channel-error",
+        message: "Unable to establish connection on channel.",
       );
     } else if (replyList.length > 1) {
       throw PlatformException(
@@ -2086,14 +2101,16 @@ class AppMetricaPigeon {
 
   Future<void> setLocationTracking(bool arg_enabled) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'dev.flutter.pigeon.appmetrica_plugin.AppMetricaPigeon.setLocationTracking', codec,
-        binaryMessenger: _binaryMessenger);
+      "dev.flutter.pigeon.appmetrica_plugin.AppMetricaPigeon.setLocationTracking",
+      codec,
+      binaryMessenger: _binaryMessenger,
+    );
     final List<Object?>? replyList =
         await channel.send(<Object?>[arg_enabled]) as List<Object?>?;
     if (replyList == null) {
       throw PlatformException(
-        code: 'channel-error',
-        message: 'Unable to establish connection on channel.',
+        code: "channel-error",
+        message: "Unable to establish connection on channel.",
       );
     } else if (replyList.length > 1) {
       throw PlatformException(
@@ -2108,14 +2125,16 @@ class AppMetricaPigeon {
 
   Future<void> setUserProfileID(String? arg_userProfileID) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'dev.flutter.pigeon.appmetrica_plugin.AppMetricaPigeon.setUserProfileID', codec,
-        binaryMessenger: _binaryMessenger);
+      "dev.flutter.pigeon.appmetrica_plugin.AppMetricaPigeon.setUserProfileID",
+      codec,
+      binaryMessenger: _binaryMessenger,
+    );
     final List<Object?>? replyList =
         await channel.send(<Object?>[arg_userProfileID]) as List<Object?>?;
     if (replyList == null) {
       throw PlatformException(
-        code: 'channel-error',
-        message: 'Unable to establish connection on channel.',
+        code: "channel-error",
+        message: "Unable to establish connection on channel.",
       );
     } else if (replyList.length > 1) {
       throw PlatformException(
@@ -2130,14 +2149,15 @@ class AppMetricaPigeon {
 
   Future<void> handlePluginInitFinished() async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'dev.flutter.pigeon.appmetrica_plugin.AppMetricaPigeon.handlePluginInitFinished', codec,
-        binaryMessenger: _binaryMessenger);
-    final List<Object?>? replyList =
-        await channel.send(null) as List<Object?>?;
+      "dev.flutter.pigeon.appmetrica_plugin.AppMetricaPigeon.handlePluginInitFinished",
+      codec,
+      binaryMessenger: _binaryMessenger,
+    );
+    final List<Object?>? replyList = await channel.send(null) as List<Object?>?;
     if (replyList == null) {
       throw PlatformException(
-        code: 'channel-error',
-        message: 'Unable to establish connection on channel.',
+        code: "channel-error",
+        message: "Unable to establish connection on channel.",
       );
     } else if (replyList.length > 1) {
       throw PlatformException(
@@ -2152,14 +2172,16 @@ class AppMetricaPigeon {
 
   Future<void> touchReporter(String arg_apiKey) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'dev.flutter.pigeon.appmetrica_plugin.AppMetricaPigeon.touchReporter', codec,
-        binaryMessenger: _binaryMessenger);
+      "dev.flutter.pigeon.appmetrica_plugin.AppMetricaPigeon.touchReporter",
+      codec,
+      binaryMessenger: _binaryMessenger,
+    );
     final List<Object?>? replyList =
         await channel.send(<Object?>[arg_apiKey]) as List<Object?>?;
     if (replyList == null) {
       throw PlatformException(
-        code: 'channel-error',
-        message: 'Unable to establish connection on channel.',
+        code: "channel-error",
+        message: "Unable to establish connection on channel.",
       );
     } else if (replyList.length > 1) {
       throw PlatformException(
@@ -2175,6 +2197,7 @@ class AppMetricaPigeon {
 
 class _ReporterPigeonCodec extends StandardMessageCodec {
   const _ReporterPigeonCodec();
+
   @override
   void writeValue(WriteBuffer buffer, Object? value) {
     if (value is AdRevenuePigeon) {
@@ -2242,43 +2265,43 @@ class _ReporterPigeonCodec extends StandardMessageCodec {
   @override
   Object? readValueOfType(int type, ReadBuffer buffer) {
     switch (type) {
-      case 128: 
+      case 128:
         return AdRevenuePigeon.decode(readValue(buffer)!);
-      case 129: 
+      case 129:
         return ECommerceAmountPigeon.decode(readValue(buffer)!);
-      case 130: 
+      case 130:
         return ECommerceAmountPigeon.decode(readValue(buffer)!);
-      case 131: 
+      case 131:
         return ECommerceCartItemPigeon.decode(readValue(buffer)!);
-      case 132: 
+      case 132:
         return ECommerceEventPigeon.decode(readValue(buffer)!);
-      case 133: 
+      case 133:
         return ECommerceOrderPigeon.decode(readValue(buffer)!);
-      case 134: 
+      case 134:
         return ECommercePricePigeon.decode(readValue(buffer)!);
-      case 135: 
+      case 135:
         return ECommercePricePigeon.decode(readValue(buffer)!);
-      case 136: 
+      case 136:
         return ECommerceProductPigeon.decode(readValue(buffer)!);
-      case 137: 
+      case 137:
         return ECommerceProductPigeon.decode(readValue(buffer)!);
-      case 138: 
+      case 138:
         return ECommerceReferrerPigeon.decode(readValue(buffer)!);
-      case 139: 
+      case 139:
         return ECommerceScreenPigeon.decode(readValue(buffer)!);
-      case 140: 
+      case 140:
         return ErrorDetailsPigeon.decode(readValue(buffer)!);
-      case 141: 
+      case 141:
         return ErrorDetailsPigeon.decode(readValue(buffer)!);
-      case 142: 
+      case 142:
         return ReceiptPigeon.decode(readValue(buffer)!);
-      case 143: 
+      case 143:
         return RevenuePigeon.decode(readValue(buffer)!);
-      case 144: 
+      case 144:
         return StackTraceElementPigeon.decode(readValue(buffer)!);
-      case 145: 
+      case 145:
         return UserProfileAttributePigeon.decode(readValue(buffer)!);
-      case 146: 
+      case 146:
         return UserProfilePigeon.decode(readValue(buffer)!);
       default:
         return super.readValueOfType(type, buffer);
@@ -2298,14 +2321,16 @@ class ReporterPigeon {
 
   Future<void> clearAppEnvironment(String arg_apiKey) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'dev.flutter.pigeon.appmetrica_plugin.ReporterPigeon.clearAppEnvironment', codec,
-        binaryMessenger: _binaryMessenger);
+      "dev.flutter.pigeon.appmetrica_plugin.ReporterPigeon.clearAppEnvironment",
+      codec,
+      binaryMessenger: _binaryMessenger,
+    );
     final List<Object?>? replyList =
         await channel.send(<Object?>[arg_apiKey]) as List<Object?>?;
     if (replyList == null) {
       throw PlatformException(
-        code: 'channel-error',
-        message: 'Unable to establish connection on channel.',
+        code: "channel-error",
+        message: "Unable to establish connection on channel.",
       );
     } else if (replyList.length > 1) {
       throw PlatformException(
@@ -2320,14 +2345,16 @@ class ReporterPigeon {
 
   Future<void> pauseSession(String arg_apiKey) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'dev.flutter.pigeon.appmetrica_plugin.ReporterPigeon.pauseSession', codec,
-        binaryMessenger: _binaryMessenger);
+      "dev.flutter.pigeon.appmetrica_plugin.ReporterPigeon.pauseSession",
+      codec,
+      binaryMessenger: _binaryMessenger,
+    );
     final List<Object?>? replyList =
         await channel.send(<Object?>[arg_apiKey]) as List<Object?>?;
     if (replyList == null) {
       throw PlatformException(
-        code: 'channel-error',
-        message: 'Unable to establish connection on channel.',
+        code: "channel-error",
+        message: "Unable to establish connection on channel.",
       );
     } else if (replyList.length > 1) {
       throw PlatformException(
@@ -2340,16 +2367,19 @@ class ReporterPigeon {
     }
   }
 
-  Future<void> putAppEnvironmentValue(String arg_apiKey, String arg_key, String? arg_value) async {
+  Future<void> putAppEnvironmentValue(
+      String arg_apiKey, String arg_key, String? arg_value) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'dev.flutter.pigeon.appmetrica_plugin.ReporterPigeon.putAppEnvironmentValue', codec,
-        binaryMessenger: _binaryMessenger);
-    final List<Object?>? replyList =
-        await channel.send(<Object?>[arg_apiKey, arg_key, arg_value]) as List<Object?>?;
+      "dev.flutter.pigeon.appmetrica_plugin.ReporterPigeon.putAppEnvironmentValue",
+      codec,
+      binaryMessenger: _binaryMessenger,
+    );
+    final List<Object?>? replyList = await channel
+        .send(<Object?>[arg_apiKey, arg_key, arg_value]) as List<Object?>?;
     if (replyList == null) {
       throw PlatformException(
-        code: 'channel-error',
-        message: 'Unable to establish connection on channel.',
+        code: "channel-error",
+        message: "Unable to establish connection on channel.",
       );
     } else if (replyList.length > 1) {
       throw PlatformException(
@@ -2362,16 +2392,19 @@ class ReporterPigeon {
     }
   }
 
-  Future<void> reportAdRevenue(String arg_apiKey, AdRevenuePigeon arg_adRevenue) async {
+  Future<void> reportAdRevenue(
+      String arg_apiKey, AdRevenuePigeon arg_adRevenue) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'dev.flutter.pigeon.appmetrica_plugin.ReporterPigeon.reportAdRevenue', codec,
-        binaryMessenger: _binaryMessenger);
-    final List<Object?>? replyList =
-        await channel.send(<Object?>[arg_apiKey, arg_adRevenue]) as List<Object?>?;
+      "dev.flutter.pigeon.appmetrica_plugin.ReporterPigeon.reportAdRevenue",
+      codec,
+      binaryMessenger: _binaryMessenger,
+    );
+    final List<Object?>? replyList = await channel
+        .send(<Object?>[arg_apiKey, arg_adRevenue]) as List<Object?>?;
     if (replyList == null) {
       throw PlatformException(
-        code: 'channel-error',
-        message: 'Unable to establish connection on channel.',
+        code: "channel-error",
+        message: "Unable to establish connection on channel.",
       );
     } else if (replyList.length > 1) {
       throw PlatformException(
@@ -2384,16 +2417,19 @@ class ReporterPigeon {
     }
   }
 
-  Future<void> reportECommerce(String arg_apiKey, ECommerceEventPigeon arg_event) async {
+  Future<void> reportECommerce(
+      String arg_apiKey, ECommerceEventPigeon arg_event) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'dev.flutter.pigeon.appmetrica_plugin.ReporterPigeon.reportECommerce', codec,
-        binaryMessenger: _binaryMessenger);
+      "dev.flutter.pigeon.appmetrica_plugin.ReporterPigeon.reportECommerce",
+      codec,
+      binaryMessenger: _binaryMessenger,
+    );
     final List<Object?>? replyList =
         await channel.send(<Object?>[arg_apiKey, arg_event]) as List<Object?>?;
     if (replyList == null) {
       throw PlatformException(
-        code: 'channel-error',
-        message: 'Unable to establish connection on channel.',
+        code: "channel-error",
+        message: "Unable to establish connection on channel.",
       );
     } else if (replyList.length > 1) {
       throw PlatformException(
@@ -2406,16 +2442,19 @@ class ReporterPigeon {
     }
   }
 
-  Future<void> reportError(String arg_apiKey, ErrorDetailsPigeon arg_error, String? arg_message) async {
+  Future<void> reportError(String arg_apiKey, ErrorDetailsPigeon arg_error,
+      String? arg_message) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'dev.flutter.pigeon.appmetrica_plugin.ReporterPigeon.reportError', codec,
-        binaryMessenger: _binaryMessenger);
-    final List<Object?>? replyList =
-        await channel.send(<Object?>[arg_apiKey, arg_error, arg_message]) as List<Object?>?;
+      "dev.flutter.pigeon.appmetrica_plugin.ReporterPigeon.reportError",
+      codec,
+      binaryMessenger: _binaryMessenger,
+    );
+    final List<Object?>? replyList = await channel
+        .send(<Object?>[arg_apiKey, arg_error, arg_message]) as List<Object?>?;
     if (replyList == null) {
       throw PlatformException(
-        code: 'channel-error',
-        message: 'Unable to establish connection on channel.',
+        code: "channel-error",
+        message: "Unable to establish connection on channel.",
       );
     } else if (replyList.length > 1) {
       throw PlatformException(
@@ -2428,16 +2467,20 @@ class ReporterPigeon {
     }
   }
 
-  Future<void> reportErrorWithGroup(String arg_apiKey, String arg_groupId, ErrorDetailsPigeon? arg_error, String? arg_message) async {
+  Future<void> reportErrorWithGroup(String arg_apiKey, String arg_groupId,
+      ErrorDetailsPigeon? arg_error, String? arg_message) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'dev.flutter.pigeon.appmetrica_plugin.ReporterPigeon.reportErrorWithGroup', codec,
-        binaryMessenger: _binaryMessenger);
-    final List<Object?>? replyList =
-        await channel.send(<Object?>[arg_apiKey, arg_groupId, arg_error, arg_message]) as List<Object?>?;
+      "dev.flutter.pigeon.appmetrica_plugin.ReporterPigeon.reportErrorWithGroup",
+      codec,
+      binaryMessenger: _binaryMessenger,
+    );
+    final List<Object?>? replyList = await channel
+            .send(<Object?>[arg_apiKey, arg_groupId, arg_error, arg_message])
+        as List<Object?>?;
     if (replyList == null) {
       throw PlatformException(
-        code: 'channel-error',
-        message: 'Unable to establish connection on channel.',
+        code: "channel-error",
+        message: "Unable to establish connection on channel.",
       );
     } else if (replyList.length > 1) {
       throw PlatformException(
@@ -2452,14 +2495,16 @@ class ReporterPigeon {
 
   Future<void> reportEvent(String arg_apiKey, String arg_eventName) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'dev.flutter.pigeon.appmetrica_plugin.ReporterPigeon.reportEvent', codec,
-        binaryMessenger: _binaryMessenger);
-    final List<Object?>? replyList =
-        await channel.send(<Object?>[arg_apiKey, arg_eventName]) as List<Object?>?;
+      "dev.flutter.pigeon.appmetrica_plugin.ReporterPigeon.reportEvent",
+      codec,
+      binaryMessenger: _binaryMessenger,
+    );
+    final List<Object?>? replyList = await channel
+        .send(<Object?>[arg_apiKey, arg_eventName]) as List<Object?>?;
     if (replyList == null) {
       throw PlatformException(
-        code: 'channel-error',
-        message: 'Unable to establish connection on channel.',
+        code: "channel-error",
+        message: "Unable to establish connection on channel.",
       );
     } else if (replyList.length > 1) {
       throw PlatformException(
@@ -2472,16 +2517,20 @@ class ReporterPigeon {
     }
   }
 
-  Future<void> reportEventWithJson(String arg_apiKey, String arg_eventName, String? arg_attributesJson) async {
+  Future<void> reportEventWithJson(String arg_apiKey, String arg_eventName,
+      String? arg_attributesJson) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'dev.flutter.pigeon.appmetrica_plugin.ReporterPigeon.reportEventWithJson', codec,
-        binaryMessenger: _binaryMessenger);
-    final List<Object?>? replyList =
-        await channel.send(<Object?>[arg_apiKey, arg_eventName, arg_attributesJson]) as List<Object?>?;
+      "dev.flutter.pigeon.appmetrica_plugin.ReporterPigeon.reportEventWithJson",
+      codec,
+      binaryMessenger: _binaryMessenger,
+    );
+    final List<Object?>? replyList = await channel
+            .send(<Object?>[arg_apiKey, arg_eventName, arg_attributesJson])
+        as List<Object?>?;
     if (replyList == null) {
       throw PlatformException(
-        code: 'channel-error',
-        message: 'Unable to establish connection on channel.',
+        code: "channel-error",
+        message: "Unable to establish connection on channel.",
       );
     } else if (replyList.length > 1) {
       throw PlatformException(
@@ -2494,16 +2543,19 @@ class ReporterPigeon {
     }
   }
 
-  Future<void> reportRevenue(String arg_apiKey, RevenuePigeon arg_revenue) async {
+  Future<void> reportRevenue(
+      String arg_apiKey, RevenuePigeon arg_revenue) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'dev.flutter.pigeon.appmetrica_plugin.ReporterPigeon.reportRevenue', codec,
-        binaryMessenger: _binaryMessenger);
-    final List<Object?>? replyList =
-        await channel.send(<Object?>[arg_apiKey, arg_revenue]) as List<Object?>?;
+      "dev.flutter.pigeon.appmetrica_plugin.ReporterPigeon.reportRevenue",
+      codec,
+      binaryMessenger: _binaryMessenger,
+    );
+    final List<Object?>? replyList = await channel
+        .send(<Object?>[arg_apiKey, arg_revenue]) as List<Object?>?;
     if (replyList == null) {
       throw PlatformException(
-        code: 'channel-error',
-        message: 'Unable to establish connection on channel.',
+        code: "channel-error",
+        message: "Unable to establish connection on channel.",
       );
     } else if (replyList.length > 1) {
       throw PlatformException(
@@ -2516,16 +2568,19 @@ class ReporterPigeon {
     }
   }
 
-  Future<void> reportUnhandledException(String arg_apiKey, ErrorDetailsPigeon arg_error) async {
+  Future<void> reportUnhandledException(
+      String arg_apiKey, ErrorDetailsPigeon arg_error) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'dev.flutter.pigeon.appmetrica_plugin.ReporterPigeon.reportUnhandledException', codec,
-        binaryMessenger: _binaryMessenger);
+      "dev.flutter.pigeon.appmetrica_plugin.ReporterPigeon.reportUnhandledException",
+      codec,
+      binaryMessenger: _binaryMessenger,
+    );
     final List<Object?>? replyList =
         await channel.send(<Object?>[arg_apiKey, arg_error]) as List<Object?>?;
     if (replyList == null) {
       throw PlatformException(
-        code: 'channel-error',
-        message: 'Unable to establish connection on channel.',
+        code: "channel-error",
+        message: "Unable to establish connection on channel.",
       );
     } else if (replyList.length > 1) {
       throw PlatformException(
@@ -2538,16 +2593,19 @@ class ReporterPigeon {
     }
   }
 
-  Future<void> reportUserProfile(String arg_apiKey, UserProfilePigeon arg_userProfile) async {
+  Future<void> reportUserProfile(
+      String arg_apiKey, UserProfilePigeon arg_userProfile) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'dev.flutter.pigeon.appmetrica_plugin.ReporterPigeon.reportUserProfile', codec,
-        binaryMessenger: _binaryMessenger);
-    final List<Object?>? replyList =
-        await channel.send(<Object?>[arg_apiKey, arg_userProfile]) as List<Object?>?;
+      "dev.flutter.pigeon.appmetrica_plugin.ReporterPigeon.reportUserProfile",
+      codec,
+      binaryMessenger: _binaryMessenger,
+    );
+    final List<Object?>? replyList = await channel
+        .send(<Object?>[arg_apiKey, arg_userProfile]) as List<Object?>?;
     if (replyList == null) {
       throw PlatformException(
-        code: 'channel-error',
-        message: 'Unable to establish connection on channel.',
+        code: "channel-error",
+        message: "Unable to establish connection on channel.",
       );
     } else if (replyList.length > 1) {
       throw PlatformException(
@@ -2562,14 +2620,16 @@ class ReporterPigeon {
 
   Future<void> resumeSession(String arg_apiKey) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'dev.flutter.pigeon.appmetrica_plugin.ReporterPigeon.resumeSession', codec,
-        binaryMessenger: _binaryMessenger);
+      "dev.flutter.pigeon.appmetrica_plugin.ReporterPigeon.resumeSession",
+      codec,
+      binaryMessenger: _binaryMessenger,
+    );
     final List<Object?>? replyList =
         await channel.send(<Object?>[arg_apiKey]) as List<Object?>?;
     if (replyList == null) {
       throw PlatformException(
-        code: 'channel-error',
-        message: 'Unable to establish connection on channel.',
+        code: "channel-error",
+        message: "Unable to establish connection on channel.",
       );
     } else if (replyList.length > 1) {
       throw PlatformException(
@@ -2584,14 +2644,16 @@ class ReporterPigeon {
 
   Future<void> sendEventsBuffer(String arg_apiKey) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'dev.flutter.pigeon.appmetrica_plugin.ReporterPigeon.sendEventsBuffer', codec,
-        binaryMessenger: _binaryMessenger);
+      "dev.flutter.pigeon.appmetrica_plugin.ReporterPigeon.sendEventsBuffer",
+      codec,
+      binaryMessenger: _binaryMessenger,
+    );
     final List<Object?>? replyList =
         await channel.send(<Object?>[arg_apiKey]) as List<Object?>?;
     if (replyList == null) {
       throw PlatformException(
-        code: 'channel-error',
-        message: 'Unable to establish connection on channel.',
+        code: "channel-error",
+        message: "Unable to establish connection on channel.",
       );
     } else if (replyList.length > 1) {
       throw PlatformException(
@@ -2604,16 +2666,19 @@ class ReporterPigeon {
     }
   }
 
-  Future<void> setDataSendingEnabled(String arg_apiKey, bool arg_enabled) async {
+  Future<void> setDataSendingEnabled(
+      String arg_apiKey, bool arg_enabled) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'dev.flutter.pigeon.appmetrica_plugin.ReporterPigeon.setDataSendingEnabled', codec,
-        binaryMessenger: _binaryMessenger);
-    final List<Object?>? replyList =
-        await channel.send(<Object?>[arg_apiKey, arg_enabled]) as List<Object?>?;
+      "dev.flutter.pigeon.appmetrica_plugin.ReporterPigeon.setDataSendingEnabled",
+      codec,
+      binaryMessenger: _binaryMessenger,
+    );
+    final List<Object?>? replyList = await channel
+        .send(<Object?>[arg_apiKey, arg_enabled]) as List<Object?>?;
     if (replyList == null) {
       throw PlatformException(
-        code: 'channel-error',
-        message: 'Unable to establish connection on channel.',
+        code: "channel-error",
+        message: "Unable to establish connection on channel.",
       );
     } else if (replyList.length > 1) {
       throw PlatformException(
@@ -2626,16 +2691,19 @@ class ReporterPigeon {
     }
   }
 
-  Future<void> setUserProfileID(String arg_apiKey, String? arg_userProfileID) async {
+  Future<void> setUserProfileID(
+      String arg_apiKey, String? arg_userProfileID) async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'dev.flutter.pigeon.appmetrica_plugin.ReporterPigeon.setUserProfileID', codec,
-        binaryMessenger: _binaryMessenger);
-    final List<Object?>? replyList =
-        await channel.send(<Object?>[arg_apiKey, arg_userProfileID]) as List<Object?>?;
+      "dev.flutter.pigeon.appmetrica_plugin.ReporterPigeon.setUserProfileID",
+      codec,
+      binaryMessenger: _binaryMessenger,
+    );
+    final List<Object?>? replyList = await channel
+        .send(<Object?>[arg_apiKey, arg_userProfileID]) as List<Object?>?;
     if (replyList == null) {
       throw PlatformException(
-        code: 'channel-error',
-        message: 'Unable to establish connection on channel.',
+        code: "channel-error",
+        message: "Unable to establish connection on channel.",
       );
     } else if (replyList.length > 1) {
       throw PlatformException(
@@ -2661,14 +2729,15 @@ class InitialDeepLinkHolderPigeon {
 
   Future<String?> getInitialDeeplink() async {
     final BasicMessageChannel<Object?> channel = BasicMessageChannel<Object?>(
-        'dev.flutter.pigeon.appmetrica_plugin.InitialDeepLinkHolderPigeon.getInitialDeeplink', codec,
-        binaryMessenger: _binaryMessenger);
-    final List<Object?>? replyList =
-        await channel.send(null) as List<Object?>?;
+      "dev.flutter.pigeon.appmetrica_plugin.InitialDeepLinkHolderPigeon.getInitialDeeplink",
+      codec,
+      binaryMessenger: _binaryMessenger,
+    );
+    final List<Object?>? replyList = await channel.send(null) as List<Object?>?;
     if (replyList == null) {
       throw PlatformException(
-        code: 'channel-error',
-        message: 'Unable to establish connection on channel.',
+        code: "channel-error",
+        message: "Unable to establish connection on channel.",
       );
     } else if (replyList.length > 1) {
       throw PlatformException(

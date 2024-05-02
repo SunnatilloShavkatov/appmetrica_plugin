@@ -6,7 +6,7 @@
  * https://yandex.com/legal/appmetrica_sdk_agreement/
  */
 
-import 'package:appmetrica_plugin/src/appmetrica.dart';
+import "package:appmetrica_plugin/src/appmetrica.dart";
 
 void setUpErrorHandling() {
   setUpErrorHandlingWithAppMetrica();

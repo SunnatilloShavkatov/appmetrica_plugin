@@ -15,13 +15,6 @@
 /// * [receipt] — in-app purchase information from Google Play/App Store;
 /// * [transactionID] - ID of the purchase transaction in the App Store. This parameter is relevant only for iOS.
 class Revenue {
-  final String price;
-  final String currency;
-  final int? quantity;
-  final String? productId;
-  final String? payload;
-  final Receipt? receipt;
-  final String? transactionId;
 
   /// Creates an object with information about income from in-app purchases. The parameters [price], [currency] are required.
   Revenue(
@@ -33,15 +26,22 @@ class Revenue {
     this.receipt,
     this.transactionId,
   });
+  final String price;
+  final String currency;
+  final int? quantity;
+  final String? productId;
+  final String? payload;
+  final Receipt? receipt;
+  final String? transactionId;
 }
 
 /// The class contains information about the purchase:
 /// * [data] — information about the purchase from Google Play/App Store;
 /// * [signature] - signature confirming the purchase in Google Play/App Store. Used for validating purchases in Google Play/App Store.
 class Receipt {
-  final String? data;
-  final String? signature;
 
   /// Creates an object with information about the purchase.
   Receipt({this.data, this.signature});
+  final String? data;
+  final String? signature;
 }

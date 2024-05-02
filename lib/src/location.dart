@@ -8,14 +8,6 @@
 
 /// The class contains settings about the device location.
 class Location {
-  final double latitude;
-  final double longitude;
-  final String? provider;
-  final double? altitude;
-  final double? accuracy;
-  final double? course;
-  final double? speed;
-  final int? timestamp;
 
   /// Creates an object of the [Location] class with the specified parameters. The parameters [latitude], [longitude] are required.
   const Location(this.latitude, this.longitude,
@@ -24,5 +16,13 @@ class Location {
       this.accuracy,
       this.course,
       this.speed,
-      this.timestamp});
+      this.timestamp,});
+  final double latitude;
+  final double longitude;
+  final String? provider;
+  final double? altitude;
+  final double? accuracy;
+  final double? course;
+  final double? speed;
+  final int? timestamp;
 }

@@ -6,20 +6,20 @@
  * https://yandex.com/legal/appmetrica_sdk_agreement/
  */
 
-import 'package:appmetrica_plugin/src/common_utils.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter_test/flutter_test.dart';
+import "package:appmetrica_plugin/src/common_utils.dart";
+import "package:flutter/foundation.dart";
+import "package:flutter_test/flutter_test.dart";
 
 void main() {
   test("Set up Crash Handling", () {
-    final error = FlutterError.onError;
+    final FlutterExceptionHandler? error = FlutterError.onError;
     setUpErrorHandling();
     expect(FlutterError.onError, isNot(same(error)));
   });
 
   test("Set up Crash Handling Twice", () {
     setUpErrorHandling();
-    final appmetricaHandler = FlutterError.onError;
+    final FlutterExceptionHandler? appmetricaHandler = FlutterError.onError;
     expect(FlutterError.onError, same(appmetricaHandler));
   });
 }

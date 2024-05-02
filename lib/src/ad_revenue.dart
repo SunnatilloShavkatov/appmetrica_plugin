@@ -18,16 +18,6 @@
 /// * [precision] - precision. Example: "publisher_defined", "estimated". Maximum length is 100 symbols;
 /// * [payload] - arbitrary payload: additional info represented as key-value pairs. Maximum size is 30 KB.
 class AdRevenue {
-  final String adRevenue;
-  final String currency;
-  final AdType? adType;
-  final String? adNetwork;
-  final String? adUnitId;
-  final String? adUnitName;
-  final String? adPlacementId;
-  final String? adPlacementName;
-  final String? precision;
-  final Map<String, String>? payload;
 
   /// Creates an object with information about income from in-app purchases. The parameters [adRevenue], [currency] are required.
   AdRevenue({
@@ -42,6 +32,16 @@ class AdRevenue {
     this.precision,
     this.payload,
   });
+  final String adRevenue;
+  final String currency;
+  final AdType? adType;
+  final String? adNetwork;
+  final String? adUnitId;
+  final String? adUnitName;
+  final String? adPlacementId;
+  final String? adPlacementName;
+  final String? precision;
+  final Map<String, String>? payload;
 }
 
 /// Enum containing possible Ad Type values.

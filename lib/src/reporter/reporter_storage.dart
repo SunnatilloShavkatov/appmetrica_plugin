@@ -6,11 +6,11 @@
  * https://yandex.com/legal/appmetrica_sdk_agreement/
  */
 
-import 'reporter.dart';
-import 'reporter_impl.dart';
+import "package:appmetrica_plugin/src/reporter/reporter.dart";
+import "package:appmetrica_plugin/src/reporter/reporter_impl.dart";
 
 class ReporterStorage {
-  final _map = <String, Reporter>{};
+  final Map<String, Reporter> _map = <String, Reporter>{};
 
   Reporter getReporter(String apiKey) =>
       _map.putIfAbsent(apiKey, () => ReporterImpl(apiKey));

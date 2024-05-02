@@ -6,15 +6,15 @@
  * https://yandex.com/legal/appmetrica_sdk_agreement/
  */
 
-import '../appmetrica_api_pigeon.dart';
+import 'package:appmetrica_plugin/src/appmetrica_api_pigeon.dart';
 
 class BirthDateAttribute extends UserProfileAttribute {
-  final int? _age;
-  final int? _year;
-  final int? _month;
-  final int? _day;
-
-  final bool _reset;
+  BirthDateAttribute.withValueReset()
+      : _age = null,
+        _year = null,
+        _month = null,
+        _day = null,
+        _reset = true;
 
   BirthDateAttribute.withAge(int age)
       : _age = age,
@@ -43,13 +43,12 @@ class BirthDateAttribute extends UserProfileAttribute {
         _month = date.month,
         _day = date.day,
         _reset = false;
+  final int? _age;
+  final int? _year;
+  final int? _month;
+  final int? _day;
 
-  BirthDateAttribute.withValueReset()
-      : _age = null,
-        _year = null,
-        _month = null,
-        _day = null,
-        _reset = true;
+  final bool _reset;
 
   @override
   UserProfileAttributeType _type() => UserProfileAttributeType.BIRTH_DATE;
@@ -80,10 +79,10 @@ class BooleanAttribute extends _ValueAttribute<bool> {
 }
 
 class CounterAttribute extends UserProfileAttribute {
+  CounterAttribute.withDelta(this.key, this._delta);
+
   final String key;
   final double _delta;
-
-  CounterAttribute.withDelta(this.key, this._delta);
 
   @override
   UserProfileAttributePigeon _toPigeon() => super._toPigeon()
@@ -169,9 +168,9 @@ class StringAttribute extends _ValueAttribute<String> {
 }
 
 class UserProfile {
-  final List<UserProfileAttribute> _attributes;
-
   UserProfile(this._attributes);
+
+  final List<UserProfileAttribute> _attributes;
 }
 
 abstract class UserProfileAttribute {
@@ -183,12 +182,12 @@ abstract class UserProfileAttribute {
 }
 
 abstract class _ValueAttribute<T> extends UserProfileAttribute {
+  _ValueAttribute(this._key, this._value, this._ifUndefined, this._reset);
+
   final String _key;
   final T? _value;
   final bool _ifUndefined;
   final bool _reset;
-
-  _ValueAttribute(this._key, this._value, this._ifUndefined, this._reset);
 
   @override
   UserProfileAttributePigeon _toPigeon() {

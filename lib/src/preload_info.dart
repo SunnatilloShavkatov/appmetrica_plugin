@@ -8,10 +8,10 @@
 
 /// The class contains information for tracking pre-installed applications.
 class PreloadInfo {
-  final String trackingId;
-  final Map<String, String>? additionalInfo;
 
   /// Creates a [PreloadInfo] object with [trackingId] and a list of additional parameters [additionalInfo].
   /// [trackingId] is a required parameter.
   const PreloadInfo(this.trackingId, {this.additionalInfo});
+  final String trackingId;
+  final Map<String, String>? additionalInfo;
 }

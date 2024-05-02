@@ -7,10 +7,10 @@ environment:
   sdk: ">=3.3.0 <4.0.0"
 
 dependencies:
-  flutter:
-    sdk: flutter
   appmetrica_plugin:
     path: ../
+  flutter:
+    sdk: flutter
 
 dev_dependencies:
   flutter_lints: ^3.0.2

@@ -8,10 +8,10 @@
 
 /// Describes an error that occurs when requesting a deferred deeplink.
 class DeferredDeeplinkRequestException implements Exception {
+  DeferredDeeplinkRequestException(this.reason, this.description, this.message);
   final DeferredDeeplinkErrorReason reason;
   final String description;
   final String? message;
-  DeferredDeeplinkRequestException(this.reason, this.description, this.message);
 }
 
 /// Contains possible error values when requesting a deferred deeplink:

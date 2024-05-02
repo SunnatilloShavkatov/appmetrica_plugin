@@ -6,24 +6,23 @@
  * https://yandex.com/legal/appmetrica_sdk_agreement/
  */
 
-import 'dart:convert';
+import "dart:convert";
 
-import 'package:appmetrica_plugin/src/ecommerce_event.dart';
-
-import '../ad_revenue.dart';
-import '../error_description.dart';
-import '../appmetrica_api_pigeon.dart';
-import '../pigeon_converter.dart';
-import '../profile/attribute.dart';
-import '../revenue.dart';
-import 'reporter.dart';
+import "package:appmetrica_plugin/src/ad_revenue.dart";
+import "package:appmetrica_plugin/src/appmetrica_api_pigeon.dart";
+import "package:appmetrica_plugin/src/ecommerce_event.dart";
+import "package:appmetrica_plugin/src/error_description.dart";
+import "package:appmetrica_plugin/src/pigeon_converter.dart";
+import "package:appmetrica_plugin/src/profile/attribute.dart";
+import "package:appmetrica_plugin/src/reporter/reporter.dart";
+import "package:appmetrica_plugin/src/revenue.dart";
 
 class ReporterImpl implements Reporter {
-  static final _reporterPigeon = ReporterPigeon();
-
-  final String _apiKey;
 
   ReporterImpl(this._apiKey);
+  static final ReporterPigeon _reporterPigeon = ReporterPigeon();
+
+  final String _apiKey;
 
   @override
   Future<void> clearAppEnvironment() =>
@@ -48,7 +47,7 @@ class ReporterImpl implements Reporter {
   @override
   Future<void> reportError({
     String? message,
-    AppMetricaErrorDescription? errorDescription
+    AppMetricaErrorDescription? errorDescription,
   }) =>
       _reporterPigeon.reportError(_apiKey, errorDescription.tryToAddCurrentTrace().toPigeon(), message);
 
@@ -56,7 +55,7 @@ class ReporterImpl implements Reporter {
   Future<void> reportErrorWithGroup(
       String groupId, {
         AppMetricaErrorDescription? errorDescription,
-        String? message
+        String? message,
       }) =>
       _reporterPigeon.reportErrorWithGroup(_apiKey, groupId, errorDescription?.toPigeon(), message);
 
@@ -71,7 +70,7 @@ class ReporterImpl implements Reporter {
   @override
   Future<void> reportEventWithMap(
       String eventName,
-      Map<String, Object>? attributes
+      Map<String, Object>? attributes,
   ) =>
       _reporterPigeon.reportEventWithJson(_apiKey, eventName, jsonEncode(attributes));
 
