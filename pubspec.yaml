@@ -1,0 +1,33 @@
+name: appmetrica_plugin
+description: A Flutter plugin for AppMetrica by Yandex. AppMetrica is a set of libraries for collecting application usage statistics.
+version: 2.0.0
+homepage: https://appmetrica.yandex.com/about
+
+environment:
+  sdk: ">=3.3.0 <4.0.0"
+  flutter: ">=3.19.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  stack_trace: ^1.11.1
+  logging: ^1.2.0
+  decimal: ^2.3.3
+
+dev_dependencies:
+  pigeon: ^18.0.0
+  flutter_test:
+    sdk: flutter
+  mockito: ^5.4.4
+  build_runner: ^2.4.9
+  channel: ^2.0.2
+  lints: ^3.0.0
+
+flutter:
+  plugin:
+    platforms:
+      android:
+        package: io.appmetrica.analytics.flutter
+        pluginClass: AppMetricaPlugin
+      ios:
+        pluginClass: AMAFAppMetricaPlugin

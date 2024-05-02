@@ -1,0 +1,6 @@
+include: package:lints/core.yaml
+
+analyzer:
+  exclude:
+    - "pigeons/*.dart"
+    - "test/*.mocks.dart"

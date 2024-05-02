@@ -1,0 +1,10 @@
+/.idea/
+/example/.dart_tool
+/example/.packages
+/example/build/
+/example/Podfile.lock
+/example/.flutter-plugins
+/example/.flutter-plugins-dependencies
+/example/pubspec.lock
+pubspec.lock
+/.dart_tool/
